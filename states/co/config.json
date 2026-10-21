@@ -1,0 +1,446 @@
+{
+  "schemaVersion": 1,
+  "abbr": "co",
+  "name": "Colorado",
+  "stateFips": "08",
+  "officeName": "Colorado Secretary of State",
+  "officeUrl": "https://www.sos.state.co.us/pubs/elections/main.html",
+  "counties": [
+    {
+      "fips": "08001",
+      "name": "Adams",
+      "aliases": []
+    },
+    {
+      "fips": "08003",
+      "name": "Alamosa",
+      "aliases": []
+    },
+    {
+      "fips": "08005",
+      "name": "Arapahoe",
+      "aliases": []
+    },
+    {
+      "fips": "08007",
+      "name": "Archuleta",
+      "aliases": []
+    },
+    {
+      "fips": "08009",
+      "name": "Baca",
+      "aliases": []
+    },
+    {
+      "fips": "08011",
+      "name": "Bent",
+      "aliases": []
+    },
+    {
+      "fips": "08013",
+      "name": "Boulder",
+      "aliases": []
+    },
+    {
+      "fips": "08014",
+      "name": "Broomfield",
+      "aliases": []
+    },
+    {
+      "fips": "08015",
+      "name": "Chaffee",
+      "aliases": []
+    },
+    {
+      "fips": "08017",
+      "name": "Cheyenne",
+      "aliases": []
+    },
+    {
+      "fips": "08019",
+      "name": "Clear Creek",
+      "aliases": []
+    },
+    {
+      "fips": "08021",
+      "name": "Conejos",
+      "aliases": []
+    },
+    {
+      "fips": "08023",
+      "name": "Costilla",
+      "aliases": []
+    },
+    {
+      "fips": "08025",
+      "name": "Crowley",
+      "aliases": []
+    },
+    {
+      "fips": "08027",
+      "name": "Custer",
+      "aliases": []
+    },
+    {
+      "fips": "08029",
+      "name": "Delta",
+      "aliases": []
+    },
+    {
+      "fips": "08031",
+      "name": "Denver",
+      "aliases": []
+    },
+    {
+      "fips": "08033",
+      "name": "Dolores",
+      "aliases": []
+    },
+    {
+      "fips": "08035",
+      "name": "Douglas",
+      "aliases": []
+    },
+    {
+      "fips": "08037",
+      "name": "Eagle",
+      "aliases": []
+    },
+    {
+      "fips": "08039",
+      "name": "Elbert",
+      "aliases": []
+    },
+    {
+      "fips": "08041",
+      "name": "El Paso",
+      "aliases": []
+    },
+    {
+      "fips": "08043",
+      "name": "Fremont",
+      "aliases": []
+    },
+    {
+      "fips": "08045",
+      "name": "Garfield",
+      "aliases": []
+    },
+    {
+      "fips": "08047",
+      "name": "Gilpin",
+      "aliases": []
+    },
+    {
+      "fips": "08049",
+      "name": "Grand",
+      "aliases": []
+    },
+    {
+      "fips": "08051",
+      "name": "Gunnison",
+      "aliases": []
+    },
+    {
+      "fips": "08053",
+      "name": "Hinsdale",
+      "aliases": []
+    },
+    {
+      "fips": "08055",
+      "name": "Huerfano",
+      "aliases": []
+    },
+    {
+      "fips": "08057",
+      "name": "Jackson",
+      "aliases": []
+    },
+    {
+      "fips": "08059",
+      "name": "Jefferson",
+      "aliases": []
+    },
+    {
+      "fips": "08061",
+      "name": "Kiowa",
+      "aliases": []
+    },
+    {
+      "fips": "08063",
+      "name": "Kit Carson",
+      "aliases": []
+    },
+    {
+      "fips": "08065",
+      "name": "Lake",
+      "aliases": []
+    },
+    {
+      "fips": "08067",
+      "name": "La Plata",
+      "aliases": []
+    },
+    {
+      "fips": "08069",
+      "name": "Larimer",
+      "aliases": []
+    },
+    {
+      "fips": "08071",
+      "name": "Las Animas",
+      "aliases": []
+    },
+    {
+      "fips": "08073",
+      "name": "Lincoln",
+      "aliases": []
+    },
+    {
+      "fips": "08075",
+      "name": "Logan",
+      "aliases": []
+    },
+    {
+      "fips": "08077",
+      "name": "Mesa",
+      "aliases": []
+    },
+    {
+      "fips": "08079",
+      "name": "Mineral",
+      "aliases": []
+    },
+    {
+      "fips": "08081",
+      "name": "Moffat",
+      "aliases": []
+    },
+    {
+      "fips": "08083",
+      "name": "Montezuma",
+      "aliases": []
+    },
+    {
+      "fips": "08085",
+      "name": "Montrose",
+      "aliases": []
+    },
+    {
+      "fips": "08087",
+      "name": "Morgan",
+      "aliases": []
+    },
+    {
+      "fips": "08089",
+      "name": "Otero",
+      "aliases": []
+    },
+    {
+      "fips": "08091",
+      "name": "Ouray",
+      "aliases": []
+    },
+    {
+      "fips": "08093",
+      "name": "Park",
+      "aliases": []
+    },
+    {
+      "fips": "08095",
+      "name": "Phillips",
+      "aliases": []
+    },
+    {
+      "fips": "08097",
+      "name": "Pitkin",
+      "aliases": []
+    },
+    {
+      "fips": "08099",
+      "name": "Prowers",
+      "aliases": []
+    },
+    {
+      "fips": "08101",
+      "name": "Pueblo",
+      "aliases": []
+    },
+    {
+      "fips": "08103",
+      "name": "Rio Blanco",
+      "aliases": []
+    },
+    {
+      "fips": "08105",
+      "name": "Rio Grande",
+      "aliases": []
+    },
+    {
+      "fips": "08107",
+      "name": "Routt",
+      "aliases": []
+    },
+    {
+      "fips": "08109",
+      "name": "Saguache",
+      "aliases": []
+    },
+    {
+      "fips": "08111",
+      "name": "San Juan",
+      "aliases": []
+    },
+    {
+      "fips": "08113",
+      "name": "San Miguel",
+      "aliases": []
+    },
+    {
+      "fips": "08115",
+      "name": "Sedgwick",
+      "aliases": []
+    },
+    {
+      "fips": "08117",
+      "name": "Summit",
+      "aliases": []
+    },
+    {
+      "fips": "08119",
+      "name": "Teller",
+      "aliases": []
+    },
+    {
+      "fips": "08121",
+      "name": "Washington",
+      "aliases": []
+    },
+    {
+      "fips": "08123",
+      "name": "Weld",
+      "aliases": []
+    },
+    {
+      "fips": "08125",
+      "name": "Yuma",
+      "aliases": []
+    }
+  ],
+  "elections": [
+    {
+      "id": "2022-general-governor",
+      "label": "2022 General Election",
+      "date": "2022-11-08",
+      "type": "general",
+      "party": null,
+      "race": "Governor",
+      "certified": true,
+      "adapter": "co",
+      "sourceFormat": "co-2022-html",
+      "sourceFiles": {
+        "turnout": "states/co/sources/2022-turnout.html",
+        "results": "states/co/sources/2022-governor.html"
+      },
+      "sources": [
+        {
+          "name": "2022 General Election Turnout, active voters",
+          "publisher": "Colorado Secretary of State",
+          "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html",
+          "retrievedAt": "2026-10-10"
+        },
+        {
+          "name": "2022 General Election Results, Governor/Lieutenant Governor",
+          "publisher": "Colorado Secretary of State",
+          "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html",
+          "retrievedAt": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "2024-general-president",
+      "label": "2024 General Election",
+      "date": "2024-11-05",
+      "type": "general",
+      "party": null,
+      "race": "President",
+      "certified": true,
+      "adapter": "co",
+      "sourceFormat": "co-2024-pdf-xlsx",
+      "sourceFiles": {
+        "turnout": "states/co/sources/2024-turnout-precinct.xlsx",
+        "results": "states/co/sources/2024-biennial-abstract.pdf"
+      },
+      "sources": [
+        {
+          "name": "2024 General Election turnout by precinct",
+          "publisher": "Colorado Secretary of State",
+          "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024GeneralPrecinctVoterTurnout.xlsx",
+          "retrievedAt": "2026-10-10"
+        },
+        {
+          "name": "2023-2024 Biennial abstract of votes",
+          "publisher": "Colorado Secretary of State",
+          "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024BiennialAbstract.pdf",
+          "retrievedAt": "2026-10-10"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "2022 General Election Turnout, active voters",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html",
+      "retrievedAt": "2026-10-10"
+    },
+    {
+      "name": "2022 General Election Results, Governor/Lieutenant Governor",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html",
+      "retrievedAt": "2026-10-10"
+    },
+    {
+      "name": "2024 General Election turnout by precinct",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024GeneralPrecinctVoterTurnout.xlsx",
+      "retrievedAt": "2026-10-10"
+    },
+    {
+      "name": "2023-2024 Biennial abstract of votes",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024BiennialAbstract.pdf",
+      "retrievedAt": "2026-10-10"
+    },
+    {
+      "name": "2025 Census cartographic county boundaries, 1:500,000",
+      "publisher": "U.S. Census Bureau",
+      "url": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip",
+      "retrievedAt": "2026-10-10"
+    }
+  ],
+  "boundaries": {
+    "file": "states/_census/cb_2025_us_county_500k.zip",
+    "sha256": "aa976c00b181939755d0da757f4c7c2dc0103c3b3b4530fb2a91c2bb62fc777c",
+    "simplify": "15%",
+    "precision": 0.00001
+  },
+  "sourceIntegrity": [
+    {
+      "file": "states/co/sources/2022-turnout.html",
+      "sha256": "fd698d30deedacda844bd52951e5d45752318778b5b4211b6ccb04dfa3e5e64b"
+    },
+    {
+      "file": "states/co/sources/2022-governor.html",
+      "sha256": "2debd28c8e1737b0fc5037a7f7d76f9665f253c1de2640abfa7e4b67fdb559cf"
+    },
+    {
+      "file": "states/co/sources/2024-turnout-precinct.xlsx",
+      "sha256": "0fd289b80ea56d82881b975c090404d98d0d284e2a882e1041adeea37b8c3b9e"
+    },
+    {
+      "file": "states/co/sources/2024-biennial-abstract.pdf",
+      "sha256": "68f9513cced12bf82b651bae9bc641e594ac0b5441670306eb07b9a158ed23f5"
+    }
+  ]
+}

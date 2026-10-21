@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "states": [
+    {
+      "abbr": "co",
+      "name": "Colorado",
+      "stateFips": "08"
+    }
+  ]
+}

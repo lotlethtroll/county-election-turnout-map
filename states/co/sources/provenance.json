@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "file": "2022-turnout.html",
+      "name": "2022 General Election Turnout, active voters",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html",
+      "retrievedAt": "2026-10-10",
+      "sha256": "fd698d30deedacda844bd52951e5d45752318778b5b4211b6ccb04dfa3e5e64b"
+    },
+    {
+      "file": "2022-governor.html",
+      "name": "2022 General Election Results, Governor/Lieutenant Governor",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html",
+      "retrievedAt": "2026-10-10",
+      "sha256": "2debd28c8e1737b0fc5037a7f7d76f9665f253c1de2640abfa7e4b67fdb559cf"
+    },
+    {
+      "file": "2024-turnout-precinct.xlsx",
+      "name": "2024 General Election turnout by precinct",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024GeneralPrecinctVoterTurnout.xlsx",
+      "retrievedAt": "2026-10-10",
+      "sha256": "0fd289b80ea56d82881b975c090404d98d0d284e2a882e1041adeea37b8c3b9e"
+    },
+    {
+      "file": "2024-biennial-abstract.pdf",
+      "name": "2023-2024 Biennial abstract of votes",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/2024/2024BiennialAbstract.pdf",
+      "retrievedAt": "2026-10-10",
+      "sha256": "68f9513cced12bf82b651bae9bc641e594ac0b5441670306eb07b9a158ed23f5"
+    }
+  ],
+  "archiveUrl": "https://www.sos.state.co.us/pubs/elections/Results/Archives.html"
+}

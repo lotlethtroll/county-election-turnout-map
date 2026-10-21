@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Unofficial map of certified county election results and voter turnout.">
+    <title>County Election and Turnout Map</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/site.css">
+    <script src="vendor/d3.min.js" defer></script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#map-area">Skip to the map</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="masthead">
+          <h1 class="site-name">County Election and Turnout Map</h1>
+          <p class="site-tag">Unofficial</p>
+        </div>
+
+        <div class="controls" role="group" aria-label="Choose what the map shows">
+          <div class="field" id="state-field" hidden>
+            <label for="state-select">State</label>
+            <select id="state-select" disabled></select>
+          </div>
+          <div class="field">
+            <label for="election-select">Election</label>
+            <select id="election-select" disabled></select>
+          </div>
+          <div class="field" id="party-field" hidden>
+            <label for="party-select">Party</label>
+            <select id="party-select"></select>
+          </div>
+          <div class="field">
+            <span class="field-label" id="view-label">Show</span>
+            <div class="segmented" role="group" aria-labelledby="view-label">
+              <button type="button" data-view="margin" aria-pressed="true" disabled>Margin</button>
+              <button type="button" data-view="turnout" aria-pressed="false" disabled>Turnout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="status-bar">
+        <p id="status-line" class="status-line" role="status">Loading election data…</p>
+      </div>
+    </header>
+
+    <main class="layout" id="main">
+      <section class="area-map panel" id="map-area" aria-labelledby="map-heading" tabindex="-1">
+        <h2 id="map-heading" class="visually-hidden" tabindex="-1">Map</h2>
+        <div class="map-frame" id="map-frame"></div>
+      </section>
+
+      <section class="area-legend panel" id="legend" aria-labelledby="legend-heading"></section>
+
+      <section class="area-summary panel" id="summary" aria-labelledby="summary-heading"></section>
+
+      <section class="area-details panel" id="details" aria-labelledby="details-heading" data-empty="true"></section>
+
+      <section class="area-list panel" id="county-list" aria-labelledby="list-heading"></section>
+
+      <section class="area-about panel" id="about" aria-labelledby="about-heading"></section>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+
+    <noscript>
+      <p class="noscript">This map needs JavaScript. For official results, <a href="https://www.usa.gov/state-election-office">find your state election office</a>.</p>
+    </noscript>
+  </body>
+</html>

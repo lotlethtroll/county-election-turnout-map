@@ -1,0 +1,10 @@
+{
+  "name": "2025 Census cartographic county boundaries, 1:500,000",
+  "publisher": "U.S. Census Bureau",
+  "url": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip",
+  "catalogUrl": "https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html",
+  "retrievedAt": "2026-10-10",
+  "file": "cb_2025_us_county_500k.zip",
+  "sha256": "aa976c00b181939755d0da757f4c7c2dc0103c3b3b4530fb2a91c2bb62fc777c",
+  "note": "One boundary vintage is used for both Colorado elections, as specified by assumption A-5. Filter STATEFP 08 and verify all 64 configured county FIPS."
+}

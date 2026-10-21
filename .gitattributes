@@ -1,0 +1,2 @@
+# Store every file byte-for-byte; source files are hash-checked against provenance.
+* -text

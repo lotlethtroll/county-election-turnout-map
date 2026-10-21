@@ -1,0 +1,19 @@
+{
+  "name": "county-election-turnout-map",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node build/cli.js",
+    "test": "node --test tests/*.test.js",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "xlsx": "file:vendor/xlsx-0.20.3.tgz",
+    "mapshaper": "0.7.83",
+    "cheerio": "1.1.2"
+  }
+}

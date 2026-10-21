@@ -1,0 +1,293 @@
+﻿
+
+
+Requirements Analysis Document: County Election and Turnout Map
+
+Andrew Stimson
+American Military University
+ITCC498: Computer Technology Advanced Capstone
+Professor Michael Tomcho
+September 26, 2026
+1. Introduction
+1.1 Purpose of the System
+The County Election and Turnout Map (CETM) is a free, public website that shows general election results and voter turnout for every county in a state on an interactive map. The first version covers Colorado and its 64 counties. The Colorado Secretary of State (SOS) publishes this information as PDF reports and spreadsheets (Colorado Secretary of State, n.d.-a), which are accurate but hard for most people to read and do not show how results differ from place to place. The CETM presents the same official numbers on a map so that anyone, regardless of technical skill, can see and compare turnout and results across the state. Although the first version covers only Colorado, the system is designed so that other states can be added later. This document, based on the approved project proposal (Stimson, 2026), describes what the system must do from the user's point of view and serves as the agreement between the customer and the developer.
+1.2 Scope of the System
+The CETM is a public website that anyone can use without an account, along with a process the site's maintainer uses to load official election data. The scope follows the approved proposal and the instructor's feedback to build the first version for Colorado while designing it for any state:
+In scope: a map of all 64 Colorado counties; certified results and turnout from the 2022 and 2024 general elections; the top-of-ticket race in each election (Governor in 2022, President in 2024); turnout and margin map views; and details for any county the user selects.
+Designed for, but not included in the first version: other states and primary elections. The system is designed so that both can be added later by loading new data, without redesigning the website.
+Out of scope: precinct-level results, other races and ballot measures, population or demographic information, and trend charts. These are possible future enhancements.
+1.3 Objectives and Success Criteria of the Project
+Table 1
+Objectives and Success Criteria
+ID
+Objective
+Success Criterion
+OBJ-1
+Show accurate official data
+Every number on the site matches the certified results published by the state, and county totals add up to the official statewide totals.
+OBJ-2
+Be easy to understand
+Test users (such as classmates) can find a county's turnout and winner, and compare two elections, without help.
+OBJ-3
+Be usable by everyone
+The site can be used with a keyboard or screen reader, and an automated accessibility check (such as WAVE) reports no errors.
+OBJ-4
+Be ready for other states and primaries
+Adding another state or a primary election requires loading new data, not redesigning the website.
+OBJ-5
+Deliver on time
+A working version is available at a public web address by the end of the course.
+
+1.4 Definitions, Acronyms, and Abbreviations
+Table 2
+Definitions, Acronyms, and Abbreviations
+Term
+Definition
+Active registered voter
+A registered voter in active status who is mailed a ballot.
+Ballots cast
+The number of ballots counted in a county for an election.
+Certified results
+The final, official election results approved by the state.
+Data Maintainer
+The person responsible for loading and updating the election data on the site (the developer in the first version).
+Margin
+The leading candidate's percentage of the vote minus the runner-up's, in percentage points. In a general election it is labeled by party (for example, D+4.2 or R+11.0); in a primary it is labeled by candidate.
+Primary election
+An election in which each party chooses its nominee. Each party's primary is a separate contest, so all candidates in it belong to the same party.
+SOS
+Colorado Secretary of State, the official source of Colorado election data.
+Top-of-ticket race
+The highest office on the ballot in a given election.
+Turnout
+Ballots cast divided by active registered voters, shown as a percentage.
+UML
+Unified Modeling Language, a standard way of drawing system diagrams, used in Section 4.
+Visitor
+Any member of the public using the website.
+WCAG
+Web Content Accessibility Guidelines, the standard for making websites usable by people with disabilities (World Wide Web Consortium, 2023).
+
+1.5 References
+Anthropic. (2026). Claude (Opus 5.5 version) [Large language model]. https://claude.ai/
+Bruegge, B., & Dutoit, A. H. (2010). Object-oriented software engineering: Using UML, patterns, and Java (3rd ed.). Prentice Hall.
+Colorado Secretary of State. (n.d.-a). Election results archives. https://www.sos.state.co.us/pubs/elections/Results/Archives.html
+Colorado Secretary of State. (n.d.-b). Elections database. https://historicalelectiondata.coloradosos.gov/
+Stimson, A. (2026). Capstone project proposal: Colorado election and turnout map [Unpublished course paper]. American Military University.
+U.S. Census Bureau. (n.d.). Cartographic boundary files. https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
+World Wide Web Consortium. (2023). Web content accessibility guidelines (WCAG) 2.2. https://www.w3.org/TR/WCAG22/
+1.6 Overview
+The rest of this document follows the structure described by Bruegge and Dutoit (2010). Section 2 lists the functional requirements, Section 3 lists the nonfunctional requirements, and Section 4 presents the system models: scenarios, use cases, an object model, and a dynamic model. Requirements are numbered and grouped by area so that each one can be traced to the system design. Claude, an AI assistant (Anthropic, 2026), was used to help organize and format this document. I directed all work, made the project decisions, and reviewed and revised all content.
+2. Functional Requirements
+Functional requirements describe what the system must do for its users. They are written from the user's point of view and grouped into six areas. Each requirement has a number (for example, FR-3.2 is the second requirement in area 3) so that it can be traced to the system design. The word "shall" marks a required behavior.
+Table 3
+Functional Requirements
+ID
+Requirement
+FR-1 Map Display
+FR-1.1
+The system shall show every county in the selected state on a single map (64 counties for Colorado).
+FR-1.2
+The system shall color each county according to the information the user has chosen to view.
+FR-1.3
+The system shall show a legend that explains, in plain words and numbers, what each color means.
+FR-1.4
+The system shall show a county's name and its mapped value when the user points to it or moves to it with the keyboard.
+FR-1.5
+The system shall show a statewide summary (statewide turnout and the statewide result) when no county is selected.
+FR-2 Choosing What to View
+FR-2.1
+The system shall let the user choose which election to view. The most recent election shall be shown first.
+FR-2.2
+The system shall let the user switch between a margin view (who led and by how much) and a turnout view (what share of voters voted).
+FR-2.3
+In the margin view for a general election, the system shall color each county by the leading party and the size of its lead.
+FR-2.4
+For a primary election, the system shall let the user choose which party's primary to view and shall color each county by the leading candidate and the size of the lead.
+FR-2.5
+The system shall always display which state, election, race, and view are currently shown.
+FR-2.6
+When more than one state is available, the system shall let the user choose which state to view.
+FR-3 County Details
+FR-3.1
+The system shall let the user select any county by clicking or tapping it, or by using the keyboard.
+FR-3.2
+For the selected county, the system shall show the county name, turnout, ballots cast, and number of active registered voters.
+FR-3.3
+For the selected county, the system shall show each candidate's votes and percentage, identify the leader, and show the margin.
+FR-3.4
+When the user changes the election while a county is selected, the system shall update the details to show the same county in the newly chosen election, so the user can compare the two.
+FR-3.5
+The system shall let the user close the county details and return to the full map.
+FR-4 Information and Transparency
+FR-4.1
+The system shall provide an About section that names each data source and links to it.
+FR-4.2
+The About section shall explain in plain language how turnout and margin are calculated.
+FR-4.3
+The system shall state that the site is unofficial, is not affiliated with any government, and that official results are available from the state election office.
+FR-4.4
+The system shall show the date the election data was last updated.
+FR-5 Managing Election Data (Data Maintainer)
+FR-5.1
+The system shall allow the Data Maintainer to load certified county results and turnout published by a state's official election office.
+FR-5.2
+Before new data is shown to the public, the system shall check that every county is included and that county totals match the official statewide totals, and shall report any problems to the Data Maintainer.
+FR-5.3
+The system shall not show the public any data that failed these checks; the previous data shall remain in place.
+FR-5.4
+The system shall allow the Data Maintainer to add a new election, general or primary, without redesigning the website.
+FR-5.5
+The system shall allow the Data Maintainer to add a new state, which shall then work with the same map, views, and county details as Colorado.
+FR-6 Handling Problems
+FR-6.1
+If the map or data cannot be loaded, the system shall show a clear message and let the user try again.
+FR-6.2
+If data for a county is missing, the system shall mark that county as "No data" instead of showing a misleading color.
+
+3. Nonfunctional Requirements
+Nonfunctional requirements describe how well the system must work and the constraints it must meet. They are grouped by the categories in Bruegge and Dutoit (2010) and numbered in the same way as the functional requirements.
+Table 4
+Nonfunctional Requirements
+ID
+Requirement
+NFR-1 Usability
+NFR-1.1
+A first-time visitor shall be able to use the map without instructions or training.
+NFR-1.2
+All labels, legends, and messages shall use plain language, and any necessary terms shall be explained on the site.
+NFR-1.3
+The site shall work on phones, tablets, and computers.
+NFR-1.4
+The site shall be usable with a keyboard alone and with a screen reader, and shall meet WCAG 2.2 Level AA (World Wide Web Consortium, 2023).
+NFR-1.5
+Color shall never be the only way information is shown; every value shall also be available as text.
+NFR-1.6
+Results shall be presented in a politically neutral way, using the usual party colors and no commentary.
+NFR-2 Reliability
+NFR-2.1
+Every number shown shall exactly match the certified results published by the state.
+NFR-2.2
+The site shall be available whenever users visit, except for brief planned updates.
+NFR-3 Performance
+NFR-3.1
+The map shall appear within three seconds on a typical home or mobile internet connection.
+NFR-3.2
+The map and county details shall respond immediately (within about half a second) when the user changes a selection.
+NFR-4 Supportability
+NFR-4.1
+The process for updating data, adding an election, and adding a state shall be written down so that someone other than the developer could follow it.
+NFR-4.2
+New elections and states shall use the same map, views, and county details, so users do not need to learn anything new.
+NFR-5 Implementation
+NFR-5.1
+The site shall run in a standard web browser, with nothing to install and no account required.
+NFR-5.2
+The system shall be built with free, open-source tools so that it has no licensing costs.
+NFR-6 Interface
+NFR-6.1
+The system shall accept election results in the file formats that state election offices publish, such as spreadsheets.
+NFR-6.2
+The site shall work in current versions of the most common web browsers (Chrome, Edge, Firefox, and Safari).
+NFR-7 Operational
+NFR-7.1
+The site shall be available to the public on the internet at no cost to users and over a secure (HTTPS) connection.
+NFR-7.2
+Running the site shall cost little or nothing.
+NFR-7.3
+Only certified results shall be published; the site shall not show unofficial or election-night results.
+NFR-8 Packaging
+NFR-8.1
+The system shall be delivered as a public website address, together with the project files and written instructions needed to update and run it.
+NFR-9 Legal
+NFR-9.1
+The system shall use only publicly available government data and shall credit each source.
+NFR-9.2
+The system shall not collect or store any personal information about visitors or voters, and shall not track visitors.
+NFR-9.3
+The site shall not use any state seal or logo or otherwise suggest that it is an official government site.
+
+4. System Models
+4.1 Scenarios
+Table 5
+Scenario 1: Checking Local Turnout
+Actor
+jordan: Visitor
+Flow of events
+1. Jordan, a Larimer County voter, opens the CETM on a phone. The map shows the 2024 election in margin view.
+2. Jordan selects the turnout view, and the map changes to show turnout.
+3. Jordan taps Larimer County and reads its turnout and ballots cast in the county details.
+4. Jordan switches to the 2022 election to compare, and the details update to show Larimer County's 2022 figures.
+
+Table 6
+Scenario 2: Loading New Election Data
+Actor
+andrew: Data Maintainer
+Flow of events
+1. Andrew downloads the certified results and turnout reports from the Colorado Secretary of State website.
+2. Andrew loads them into the system. The system reports that one county name does not match, so Andrew corrects it and loads the data again.
+3. The system confirms that all 64 counties are included and the totals match the official statewide totals.
+4. Andrew publishes the update, and visitors see the new election on the map.
+
+4.2 Use Case Model
+Figure 1 shows the system's use cases. The Visitor is any member of the public using the website. The Data Maintainer loads official election data from the state election office (the Colorado Secretary of State in the first version) and county maps from the U.S. Census Bureau (n.d.), and can add another state (UC-07).
+Figure 1
+Use Case Diagram
+
+Table 7
+Use Case UC-04: View County Details
+Actor
+Visitor
+Entry condition
+The map is displayed.
+Flow of events
+1. The Visitor selects a county.
+2. The system highlights the county and opens its details.
+3. The details show the county's turnout, ballots cast, registered voters, candidate results, and margin.
+4. The Visitor closes the details and returns to the full map.
+Exit condition
+The Visitor has seen the county's results.
+Requirements
+FR-3.1 to FR-3.5
+
+Table 8
+Use Case UC-06: Load Election Data
+Actor
+Data Maintainer
+Entry condition
+Certified results and turnout are available from the state election office.
+Flow of events
+1. The Data Maintainer downloads the official results and loads them into the system.
+2. The system calculates turnout and margins for each county.
+3. The system checks that every county is included and that totals match the official results.
+4. If the checks pass, the new data becomes available on the site; if not, the system reports the problem and the site keeps the previous data.
+Exit condition
+Checked, official data is available to visitors.
+Requirements
+FR-5.1 to FR-5.4
+
+Table 9
+Use Case UC-07: Add a State
+Actor
+Data Maintainer
+Entry condition
+The new state's official county results are publicly available.
+Flow of events
+1. The Data Maintainer adds the new state and its county map to the system.
+2. The Data Maintainer loads the state's election data (UC-06).
+3. The new state appears on the site with the same map, views, and county details as Colorado.
+Exit condition
+Visitors can choose and view the new state.
+Requirements
+FR-2.6, FR-5.5, NFR-4.2
+
+4.3 Object Model
+Figure 2 shows the main kinds of information the system keeps and how they relate. A State contains its counties and holds its elections, which is what allows states other than Colorado to be added. Each Election is either a general or a primary election (with a party for a primary), has its candidates, and has a County Result for each county. A County Result holds the county's registered voters, ballots cast, turnout, and margin, along with the votes for each candidate.
+Figure 2
+Object Model (UML Class Diagram)
+
+4.4 Dynamic Model
+Figure 3 is a sequence diagram for UC-04, View County Details. It shows the order of events when the Visitor selects a county: the map looks up that county's results, highlights the county, and shows its details to the Visitor.
+Figure 3
+Sequence Diagram for Viewing County Details
+

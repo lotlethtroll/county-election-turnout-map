@@ -1,0 +1,2021 @@
+{
+  "schemaVersion": 1,
+  "electionId": "2022-general-governor",
+  "label": "2022 General Election",
+  "date": "2022-11-08",
+  "race": "Governor",
+  "type": "general",
+  "party": null,
+  "builtAt": "2026-10-10T16:16:24.272Z",
+  "candidates": [
+    {
+      "id": "heidi-ganahl",
+      "name": "Heidi Ganahl / Danny Moore",
+      "party": "R",
+      "statewideVotes": 983040
+    },
+    {
+      "id": "jared-polis",
+      "name": "Jared Polis / Dianne Primavera",
+      "party": "D",
+      "statewideVotes": 1468481
+    },
+    {
+      "id": "paul-noel-fiorino",
+      "name": "Paul Noël Fiorino / Cynthia Munhos de Aquino Sirianni",
+      "party": "UPA",
+      "statewideVotes": 6687
+    },
+    {
+      "id": "danielle-neuschwanger",
+      "name": "Danielle Neuschwanger / Darryl Gibbs",
+      "party": "ACN",
+      "statewideVotes": 21623
+    },
+    {
+      "id": "kevin-ruskusky",
+      "name": "Kevin Ruskusky / Michele Poague",
+      "party": "LIB",
+      "statewideVotes": 28939
+    },
+    {
+      "id": "paul-willmon",
+      "name": "Paul Willmon / Kathren May",
+      "party": "UNA",
+      "statewideVotes": 8
+    },
+    {
+      "id": "zachary-varon",
+      "name": "Zachary Varon / Sean Hoyt",
+      "party": "UNA",
+      "statewideVotes": 52
+    }
+  ],
+  "statewide": {
+    "name": "Colorado",
+    "activeVoters": 3839814,
+    "ballotsCast": 2543316,
+    "raceTotal": 2508830,
+    "votes": {
+      "heidi-ganahl": 983040,
+      "jared-polis": 1468481,
+      "paul-noel-fiorino": 6687,
+      "danielle-neuschwanger": 21623,
+      "kevin-ruskusky": 28939,
+      "paul-willmon": 8,
+      "zachary-varon": 52
+    },
+    "shares": {
+      "heidi-ganahl": 39.183204920221776,
+      "jared-polis": 58.53250319870218,
+      "paul-noel-fiorino": 0.2665385857152537,
+      "danielle-neuschwanger": 0.8618758544819697,
+      "kevin-ruskusky": 1.1534858878441345,
+      "paul-willmon": 0.00031887373795753396,
+      "zachary-varon": 0.002072679296723971
+    },
+    "turnout": 66.23539577698295,
+    "leaderId": "jared-polis",
+    "runnerUpId": "heidi-ganahl",
+    "margin": 19.349298278480408,
+    "marginLabel": "D+19.3"
+  },
+  "counties": {
+    "08001": {
+      "name": "Adams",
+      "fips": "08001",
+      "activeVoters": 296776,
+      "ballotsCast": 169626,
+      "raceTotal": 167624,
+      "votes": {
+        "heidi-ganahl": 63960,
+        "jared-polis": 99625,
+        "paul-noel-fiorino": 534,
+        "danielle-neuschwanger": 1315,
+        "kevin-ruskusky": 2184,
+        "paul-willmon": 1,
+        "zachary-varon": 5
+      },
+      "shares": {
+        "heidi-ganahl": 38.15682718465136,
+        "jared-polis": 59.433613325060854,
+        "paul-noel-fiorino": 0.3185701331551568,
+        "danielle-neuschwanger": 0.78449386722665,
+        "kevin-ruskusky": 1.3029160502076076,
+        "paul-willmon": 0.0005965732830620913,
+        "zachary-varon": 0.002982866415310457
+      },
+      "turnout": 57.15623904897971,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 21.276786140409488,
+      "marginLabel": "D+21.3"
+    },
+    "08003": {
+      "name": "Alamosa",
+      "fips": "08003",
+      "activeVoters": 9880,
+      "ballotsCast": 6020,
+      "raceTotal": 5921,
+      "votes": {
+        "heidi-ganahl": 2674,
+        "jared-polis": 3022,
+        "paul-noel-fiorino": 22,
+        "danielle-neuschwanger": 149,
+        "kevin-ruskusky": 53,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 45.16129032258064,
+        "jared-polis": 51.03867589934132,
+        "paul-noel-fiorino": 0.3715588583009627,
+        "danielle-neuschwanger": 2.5164668130383383,
+        "kevin-ruskusky": 0.8951190677250466,
+        "paul-willmon": 0,
+        "zachary-varon": 0.01688903901368012
+      },
+      "turnout": 60.93117408906883,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 5.877385576760682,
+      "marginLabel": "D+5.9"
+    },
+    "08005": {
+      "name": "Arapahoe",
+      "fips": "08005",
+      "activeVoters": 410008,
+      "ballotsCast": 260210,
+      "raceTotal": 257126,
+      "votes": {
+        "heidi-ganahl": 89656,
+        "jared-polis": 162304,
+        "paul-noel-fiorino": 719,
+        "danielle-neuschwanger": 1434,
+        "kevin-ruskusky": 3008,
+        "paul-willmon": 0,
+        "zachary-varon": 5
+      },
+      "shares": {
+        "heidi-ganahl": 34.86850804663861,
+        "jared-polis": 63.12236024361597,
+        "paul-noel-fiorino": 0.27962944237455567,
+        "danielle-neuschwanger": 0.5577032272115616,
+        "kevin-ruskusky": 1.1698544682373624,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0019445719219371048
+      },
+      "turnout": 63.46461532457903,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 28.25385219697736,
+      "marginLabel": "D+28.3"
+    },
+    "08007": {
+      "name": "Archuleta",
+      "fips": "08007",
+      "activeVoters": 11143,
+      "ballotsCast": 7952,
+      "raceTotal": 7810,
+      "votes": {
+        "heidi-ganahl": 3961,
+        "jared-polis": 3641,
+        "paul-noel-fiorino": 17,
+        "danielle-neuschwanger": 97,
+        "kevin-ruskusky": 92,
+        "paul-willmon": 0,
+        "zachary-varon": 2
+      },
+      "shares": {
+        "heidi-ganahl": 50.71702944942381,
+        "jared-polis": 46.61971830985915,
+        "paul-noel-fiorino": 0.21766965428937263,
+        "danielle-neuschwanger": 1.2419974391805377,
+        "kevin-ruskusky": 1.17797695262484,
+        "paul-willmon": 0,
+        "zachary-varon": 0.02560819462227913
+      },
+      "turnout": 71.36318765144037,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 4.097311139564661,
+      "marginLabel": "R+4.1"
+    },
+    "08009": {
+      "name": "Baca",
+      "fips": "08009",
+      "activeVoters": 2607,
+      "ballotsCast": 1785,
+      "raceTotal": 1747,
+      "votes": {
+        "heidi-ganahl": 1103,
+        "jared-polis": 298,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 332,
+        "kevin-ruskusky": 14,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 63.13680595306239,
+        "jared-polis": 17.057813394390383,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 19.004006868918143,
+        "kevin-ruskusky": 0.8013737836290785,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 68.46950517836594,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "danielle-neuschwanger",
+      "margin": 44.132799084144246,
+      "marginLabel": "R+44.1"
+    },
+    "08011": {
+      "name": "Bent",
+      "fips": "08011",
+      "activeVoters": 2817,
+      "ballotsCast": 1866,
+      "raceTotal": 1830,
+      "votes": {
+        "heidi-ganahl": 1091,
+        "jared-polis": 627,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 89,
+        "kevin-ruskusky": 19,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 59.61748633879781,
+        "jared-polis": 34.26229508196722,
+        "paul-noel-fiorino": 0.2185792349726776,
+        "danielle-neuschwanger": 4.863387978142077,
+        "kevin-ruskusky": 1.0382513661202186,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 66.24068157614484,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 25.3551912568306,
+      "marginLabel": "R+25.4"
+    },
+    "08013": {
+      "name": "Boulder",
+      "fips": "08013",
+      "activeVoters": 224533,
+      "ballotsCast": 167208,
+      "raceTotal": 165077,
+      "votes": {
+        "heidi-ganahl": 30454,
+        "jared-polis": 132173,
+        "paul-noel-fiorino": 446,
+        "danielle-neuschwanger": 527,
+        "kevin-ruskusky": 1476,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 18.44836046208739,
+        "jared-polis": 80.06748365914088,
+        "paul-noel-fiorino": 0.2701769477274242,
+        "danielle-neuschwanger": 0.3192449584133465,
+        "kevin-ruskusky": 0.8941281947212512,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0006057779097027448
+      },
+      "turnout": 74.46923169422757,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 61.6191231970535,
+      "marginLabel": "D+61.6"
+    },
+    "08014": {
+      "name": "Broomfield",
+      "fips": "08014",
+      "activeVoters": 52551,
+      "ballotsCast": 37882,
+      "raceTotal": 37480,
+      "votes": {
+        "heidi-ganahl": 11796,
+        "jared-polis": 25006,
+        "paul-noel-fiorino": 82,
+        "danielle-neuschwanger": 170,
+        "kevin-ruskusky": 425,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 31.472785485592315,
+        "jared-polis": 66.71824973319104,
+        "paul-noel-fiorino": 0.21878335112059766,
+        "danielle-neuschwanger": 0.45357524012806827,
+        "kevin-ruskusky": 1.1339381003201707,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0026680896478121665
+      },
+      "turnout": 72.08616391695686,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 35.24546424759872,
+      "marginLabel": "D+35.2"
+    },
+    "08015": {
+      "name": "Chaffee",
+      "fips": "08015",
+      "activeVoters": 15862,
+      "ballotsCast": 11947,
+      "raceTotal": 11749,
+      "votes": {
+        "heidi-ganahl": 4646,
+        "jared-polis": 6807,
+        "paul-noel-fiorino": 29,
+        "danielle-neuschwanger": 141,
+        "kevin-ruskusky": 126,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 39.543790960932846,
+        "jared-polis": 57.93684568899481,
+        "paul-noel-fiorino": 0.24682951740573666,
+        "danielle-neuschwanger": 1.20010213635203,
+        "kevin-ruskusky": 1.0724316963145801,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 75.3183709494389,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 18.393054728061962,
+      "marginLabel": "D+18.4"
+    },
+    "08017": {
+      "name": "Cheyenne",
+      "fips": "08017",
+      "activeVoters": 1243,
+      "ballotsCast": 925,
+      "raceTotal": 915,
+      "votes": {
+        "heidi-ganahl": 758,
+        "jared-polis": 115,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 36,
+        "kevin-ruskusky": 6,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 82.8415300546448,
+        "jared-polis": 12.568306010928962,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 3.934426229508197,
+        "kevin-ruskusky": 0.6557377049180327,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 74.41673370876912,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 70.27322404371584,
+      "marginLabel": "R+70.3"
+    },
+    "08019": {
+      "name": "Clear Creek",
+      "fips": "08019",
+      "activeVoters": 7537,
+      "ballotsCast": 5265,
+      "raceTotal": 5180,
+      "votes": {
+        "heidi-ganahl": 1919,
+        "jared-polis": 3118,
+        "paul-noel-fiorino": 13,
+        "danielle-neuschwanger": 42,
+        "kevin-ruskusky": 88,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 37.04633204633205,
+        "jared-polis": 60.19305019305019,
+        "paul-noel-fiorino": 0.25096525096525096,
+        "danielle-neuschwanger": 0.8108108108108109,
+        "kevin-ruskusky": 1.698841698841699,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 69.85538012471805,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 23.146718146718147,
+      "marginLabel": "D+23.1"
+    },
+    "08021": {
+      "name": "Conejos",
+      "fips": "08021",
+      "activeVoters": 5170,
+      "ballotsCast": 3488,
+      "raceTotal": 3450,
+      "votes": {
+        "heidi-ganahl": 1702,
+        "jared-polis": 1659,
+        "paul-noel-fiorino": 8,
+        "danielle-neuschwanger": 66,
+        "kevin-ruskusky": 15,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 49.333333333333336,
+        "jared-polis": 48.08695652173913,
+        "paul-noel-fiorino": 0.2318840579710145,
+        "danielle-neuschwanger": 1.9130434782608694,
+        "kevin-ruskusky": 0.43478260869565216,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 67.4661508704062,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 1.2463768115942029,
+      "marginLabel": "R+1.2"
+    },
+    "08023": {
+      "name": "Costilla",
+      "fips": "08023",
+      "activeVoters": 2864,
+      "ballotsCast": 1750,
+      "raceTotal": 1676,
+      "votes": {
+        "heidi-ganahl": 507,
+        "jared-polis": 1120,
+        "paul-noel-fiorino": 6,
+        "danielle-neuschwanger": 25,
+        "kevin-ruskusky": 18,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 30.250596658711217,
+        "jared-polis": 66.82577565632458,
+        "paul-noel-fiorino": 0.35799522673031026,
+        "danielle-neuschwanger": 1.4916467780429594,
+        "kevin-ruskusky": 1.0739856801909307,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 61.10335195530726,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 36.575178997613364,
+      "marginLabel": "D+36.6"
+    },
+    "08025": {
+      "name": "Crowley",
+      "fips": "08025",
+      "activeVoters": 2161,
+      "ballotsCast": 1398,
+      "raceTotal": 1378,
+      "votes": {
+        "heidi-ganahl": 861,
+        "jared-polis": 405,
+        "paul-noel-fiorino": 6,
+        "danielle-neuschwanger": 91,
+        "kevin-ruskusky": 15,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 62.48185776487664,
+        "jared-polis": 29.390420899854863,
+        "paul-noel-fiorino": 0.43541364296081275,
+        "danielle-neuschwanger": 6.60377358490566,
+        "kevin-ruskusky": 1.0885341074020318,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 64.69227209625174,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 33.09143686502177,
+      "marginLabel": "R+33.1"
+    },
+    "08027": {
+      "name": "Custer",
+      "fips": "08027",
+      "activeVoters": 4468,
+      "ballotsCast": 3385,
+      "raceTotal": 3341,
+      "votes": {
+        "heidi-ganahl": 2103,
+        "jared-polis": 1140,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 42,
+        "kevin-ruskusky": 52,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 62.94522598024543,
+        "jared-polis": 34.12152050284346,
+        "paul-noel-fiorino": 0.11972463334331039,
+        "danielle-neuschwanger": 1.257108650104759,
+        "kevin-ruskusky": 1.556420233463035,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 75.76096687555953,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 28.823705477401973,
+      "marginLabel": "R+28.8"
+    },
+    "08029": {
+      "name": "Delta",
+      "fips": "08029",
+      "activeVoters": 22654,
+      "ballotsCast": 16123,
+      "raceTotal": 15917,
+      "votes": {
+        "heidi-ganahl": 9753,
+        "jared-polis": 5651,
+        "paul-noel-fiorino": 53,
+        "danielle-neuschwanger": 282,
+        "kevin-ruskusky": 178,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 61.27410944273418,
+        "jared-polis": 35.50292140478734,
+        "paul-noel-fiorino": 0.33297731984670476,
+        "danielle-neuschwanger": 1.7716906452220897,
+        "kevin-ruskusky": 1.1183011874096878,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.17065418910568,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 25.771188037946853,
+      "marginLabel": "R+25.8"
+    },
+    "08031": {
+      "name": "Denver",
+      "fips": "08031",
+      "activeVoters": 457501,
+      "ballotsCast": 287846,
+      "raceTotal": 284424,
+      "votes": {
+        "heidi-ganahl": 46046,
+        "jared-polis": 234250,
+        "paul-noel-fiorino": 788,
+        "danielle-neuschwanger": 722,
+        "kevin-ruskusky": 2613,
+        "paul-willmon": 0,
+        "zachary-varon": 5
+      },
+      "shares": {
+        "heidi-ganahl": 16.189210474502854,
+        "jared-polis": 82.35943520940567,
+        "paul-noel-fiorino": 0.2770511630523444,
+        "danielle-neuschwanger": 0.2538463702078587,
+        "kevin-ruskusky": 0.918698843979411,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0017579388518549769
+      },
+      "turnout": 62.9170209464023,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 66.17022473490282,
+      "marginLabel": "D+66.2"
+    },
+    "08033": {
+      "name": "Dolores",
+      "fips": "08033",
+      "activeVoters": 1701,
+      "ballotsCast": 1332,
+      "raceTotal": 1299,
+      "votes": {
+        "heidi-ganahl": 806,
+        "jared-polis": 348,
+        "paul-noel-fiorino": 3,
+        "danielle-neuschwanger": 125,
+        "kevin-ruskusky": 17,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 62.04772902232486,
+        "jared-polis": 26.78983833718245,
+        "paul-noel-fiorino": 0.23094688221709006,
+        "danielle-neuschwanger": 9.62278675904542,
+        "kevin-ruskusky": 1.308698999230177,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 78.3068783068783,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 35.25789068514242,
+      "marginLabel": "R+35.3"
+    },
+    "08035": {
+      "name": "Douglas",
+      "fips": "08035",
+      "activeVoters": 269103,
+      "ballotsCast": 193202,
+      "raceTotal": 190690,
+      "votes": {
+        "heidi-ganahl": 94312,
+        "jared-polis": 93022,
+        "paul-noel-fiorino": 339,
+        "danielle-neuschwanger": 1037,
+        "kevin-ruskusky": 1978,
+        "paul-willmon": 0,
+        "zachary-varon": 2
+      },
+      "shares": {
+        "heidi-ganahl": 49.45828307724579,
+        "jared-polis": 48.78179243798836,
+        "paul-noel-fiorino": 0.17777544706067439,
+        "danielle-neuschwanger": 0.5438145681472547,
+        "kevin-ruskusky": 1.037285646861398,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0010488226965231528
+      },
+      "turnout": 71.7948146248834,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 0.6764906392574335,
+      "marginLabel": "R+0.7"
+    },
+    "08037": {
+      "name": "Eagle",
+      "fips": "08037",
+      "activeVoters": 33633,
+      "ballotsCast": 22513,
+      "raceTotal": 22222,
+      "votes": {
+        "heidi-ganahl": 6661,
+        "jared-polis": 15230,
+        "paul-noel-fiorino": 32,
+        "danielle-neuschwanger": 73,
+        "kevin-ruskusky": 222,
+        "paul-willmon": 0,
+        "zachary-varon": 4
+      },
+      "shares": {
+        "heidi-ganahl": 29.974799747997483,
+        "jared-polis": 68.53568535685358,
+        "paul-noel-fiorino": 0.14400144001440013,
+        "danielle-neuschwanger": 0.3285032850328503,
+        "kevin-ruskusky": 0.999009990099901,
+        "paul-willmon": 0,
+        "zachary-varon": 0.018000180001800016
+      },
+      "turnout": 66.93723426396694,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 38.56088560885609,
+      "marginLabel": "D+38.6"
+    },
+    "08041": {
+      "name": "El Paso",
+      "fips": "08041",
+      "activeVoters": 469368,
+      "ballotsCast": 288059,
+      "raceTotal": 285027,
+      "votes": {
+        "heidi-ganahl": 144384,
+        "jared-polis": 133447,
+        "paul-noel-fiorino": 760,
+        "danielle-neuschwanger": 2607,
+        "kevin-ruskusky": 3821,
+        "paul-willmon": 1,
+        "zachary-varon": 7
+      },
+      "shares": {
+        "heidi-ganahl": 50.65625361807828,
+        "jared-polis": 46.819073280776905,
+        "paul-noel-fiorino": 0.266641405901897,
+        "danielle-neuschwanger": 0.9146501910345335,
+        "kevin-ruskusky": 1.3405747525673006,
+        "paul-willmon": 0.000350843955134075,
+        "zachary-varon": 0.002455907685938525
+      },
+      "turnout": 61.37167425133371,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 3.8371803373013784,
+      "marginLabel": "R+3.8"
+    },
+    "08039": {
+      "name": "Elbert",
+      "fips": "08039",
+      "activeVoters": 22168,
+      "ballotsCast": 16439,
+      "raceTotal": 16277,
+      "votes": {
+        "heidi-ganahl": 11618,
+        "jared-polis": 4118,
+        "paul-noel-fiorino": 34,
+        "danielle-neuschwanger": 326,
+        "kevin-ruskusky": 181,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 71.37678933464397,
+        "jared-polis": 25.29950236530073,
+        "paul-noel-fiorino": 0.20888370092768935,
+        "danielle-neuschwanger": 2.0028260736007866,
+        "kevin-ruskusky": 1.111998525526817,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 74.15644171779141,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 46.07728696934325,
+      "marginLabel": "R+46.1"
+    },
+    "08043": {
+      "name": "Fremont",
+      "fips": "08043",
+      "activeVoters": 30691,
+      "ballotsCast": 20234,
+      "raceTotal": 19965,
+      "votes": {
+        "heidi-ganahl": 12087,
+        "jared-polis": 7165,
+        "paul-noel-fiorino": 47,
+        "danielle-neuschwanger": 436,
+        "kevin-ruskusky": 229,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 60.54094665664913,
+        "jared-polis": 35.887803656398695,
+        "paul-noel-fiorino": 0.23541197094916105,
+        "danielle-neuschwanger": 2.183821687953919,
+        "kevin-ruskusky": 1.147007262709742,
+        "paul-willmon": 0,
+        "zachary-varon": 0.005008765339343852
+      },
+      "turnout": 65.92812225082272,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 24.653143000250438,
+      "marginLabel": "R+24.7"
+    },
+    "08045": {
+      "name": "Garfield",
+      "fips": "08045",
+      "activeVoters": 37189,
+      "ballotsCast": 24829,
+      "raceTotal": 24538,
+      "votes": {
+        "heidi-ganahl": 10444,
+        "jared-polis": 13443,
+        "paul-noel-fiorino": 57,
+        "danielle-neuschwanger": 280,
+        "kevin-ruskusky": 313,
+        "paul-willmon": 1,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 42.56255603553672,
+        "jared-polis": 54.784416007824596,
+        "paul-noel-fiorino": 0.23229277039693536,
+        "danielle-neuschwanger": 1.1410872931779281,
+        "kevin-ruskusky": 1.2755725813024696,
+        "paul-willmon": 0.0040753117613497435,
+        "zachary-varon": 0
+      },
+      "turnout": 66.7643658070935,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 12.221859972287879,
+      "marginLabel": "D+12.2"
+    },
+    "08047": {
+      "name": "Gilpin",
+      "fips": "08047",
+      "activeVoters": 4854,
+      "ballotsCast": 3454,
+      "raceTotal": 3417,
+      "votes": {
+        "heidi-ganahl": 1302,
+        "jared-polis": 2023,
+        "paul-noel-fiorino": 9,
+        "danielle-neuschwanger": 25,
+        "kevin-ruskusky": 58,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 38.10359964881475,
+        "jared-polis": 59.20398009950249,
+        "paul-noel-fiorino": 0.2633889376646181,
+        "danielle-neuschwanger": 0.7316359379572724,
+        "kevin-ruskusky": 1.6973953760608722,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.1578079934075,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 21.100380450687737,
+      "marginLabel": "D+21.1"
+    },
+    "08049": {
+      "name": "Grand",
+      "fips": "08049",
+      "activeVoters": 11668,
+      "ballotsCast": 8093,
+      "raceTotal": 8006,
+      "votes": {
+        "heidi-ganahl": 3649,
+        "jared-polis": 4162,
+        "paul-noel-fiorino": 20,
+        "danielle-neuschwanger": 57,
+        "kevin-ruskusky": 118,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 45.5783162628029,
+        "jared-polis": 51.986010492130895,
+        "paul-noel-fiorino": 0.2498126405196103,
+        "danielle-neuschwanger": 0.7119660254808894,
+        "kevin-ruskusky": 1.4738945790657008,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 69.36064449777169,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 6.407694229328004,
+      "marginLabel": "D+6.4"
+    },
+    "08051": {
+      "name": "Gunnison",
+      "fips": "08051",
+      "activeVoters": 12397,
+      "ballotsCast": 9392,
+      "raceTotal": 9135,
+      "votes": {
+        "heidi-ganahl": 2733,
+        "jared-polis": 6184,
+        "paul-noel-fiorino": 36,
+        "danielle-neuschwanger": 48,
+        "kevin-ruskusky": 134,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 29.917898193760262,
+        "jared-polis": 67.69567597153804,
+        "paul-noel-fiorino": 0.3940886699507389,
+        "danielle-neuschwanger": 0.5254515599343186,
+        "kevin-ruskusky": 1.4668856048166394,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 75.76026458014036,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 37.77777777777778,
+      "marginLabel": "D+37.8"
+    },
+    "08053": {
+      "name": "Hinsdale",
+      "fips": "08053",
+      "activeVoters": 708,
+      "ballotsCast": 523,
+      "raceTotal": 511,
+      "votes": {
+        "heidi-ganahl": 251,
+        "jared-polis": 246,
+        "paul-noel-fiorino": 1,
+        "danielle-neuschwanger": 6,
+        "kevin-ruskusky": 7,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 49.11937377690802,
+        "jared-polis": 48.14090019569471,
+        "paul-noel-fiorino": 0.19569471624266144,
+        "danielle-neuschwanger": 1.1741682974559686,
+        "kevin-ruskusky": 1.36986301369863,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 73.87005649717514,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 0.9784735812133072,
+      "marginLabel": "R+1.0"
+    },
+    "08055": {
+      "name": "Huerfano",
+      "fips": "08055",
+      "activeVoters": 5458,
+      "ballotsCast": 3898,
+      "raceTotal": 3859,
+      "votes": {
+        "heidi-ganahl": 1656,
+        "jared-polis": 2102,
+        "paul-noel-fiorino": 16,
+        "danielle-neuschwanger": 45,
+        "kevin-ruskusky": 40,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 42.912671676600155,
+        "jared-polis": 54.470069966312515,
+        "paul-noel-fiorino": 0.4146151852811609,
+        "danielle-neuschwanger": 1.166105208603265,
+        "kevin-ruskusky": 1.0365379632029024,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.41810186881642,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 11.55739828971236,
+      "marginLabel": "D+11.6"
+    },
+    "08057": {
+      "name": "Jackson",
+      "fips": "08057",
+      "activeVoters": 999,
+      "ballotsCast": 700,
+      "raceTotal": 682,
+      "votes": {
+        "heidi-ganahl": 526,
+        "jared-polis": 140,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 6,
+        "kevin-ruskusky": 10,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 77.12609970674487,
+        "jared-polis": 20.527859237536656,
+        "paul-noel-fiorino": 0,
+        "danielle-neuschwanger": 0.8797653958944283,
+        "kevin-ruskusky": 1.466275659824047,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 70.07007007007007,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 56.598240469208214,
+      "marginLabel": "R+56.6"
+    },
+    "08059": {
+      "name": "Jefferson",
+      "fips": "08059",
+      "activeVoters": 423575,
+      "ballotsCast": 303604,
+      "raceTotal": 300165,
+      "votes": {
+        "heidi-ganahl": 108638,
+        "jared-polis": 185398,
+        "paul-noel-fiorino": 802,
+        "danielle-neuschwanger": 1605,
+        "kevin-ruskusky": 3715,
+        "paul-willmon": 3,
+        "zachary-varon": 4
+      },
+      "shares": {
+        "heidi-ganahl": 36.1927606483101,
+        "jared-polis": 61.765362384022126,
+        "paul-noel-fiorino": 0.2671863808238802,
+        "danielle-neuschwanger": 0.5347059117485383,
+        "kevin-ruskusky": 1.2376526243899189,
+        "paul-willmon": 0.0009994503023337165,
+        "zachary-varon": 0.001332600403111622
+      },
+      "turnout": 71.67656259222098,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 25.572601735712023,
+      "marginLabel": "D+25.6"
+    },
+    "08061": {
+      "name": "Kiowa",
+      "fips": "08061",
+      "activeVoters": 989,
+      "ballotsCast": 777,
+      "raceTotal": 759,
+      "votes": {
+        "heidi-ganahl": 562,
+        "jared-polis": 99,
+        "paul-noel-fiorino": 3,
+        "danielle-neuschwanger": 91,
+        "kevin-ruskusky": 4,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 74.04479578392622,
+        "jared-polis": 13.043478260869565,
+        "paul-noel-fiorino": 0.3952569169960474,
+        "danielle-neuschwanger": 11.989459815546773,
+        "kevin-ruskusky": 0.5270092226613966,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 78.56420626895854,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 61.001317523056656,
+      "marginLabel": "R+61.0"
+    },
+    "08063": {
+      "name": "Kit Carson",
+      "fips": "08063",
+      "activeVoters": 4607,
+      "ballotsCast": 3072,
+      "raceTotal": 3026,
+      "votes": {
+        "heidi-ganahl": 2465,
+        "jared-polis": 475,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 59,
+        "kevin-ruskusky": 23,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 81.46067415730337,
+        "jared-polis": 15.697290152015864,
+        "paul-noel-fiorino": 0.13218770654329146,
+        "danielle-neuschwanger": 1.9497686715135494,
+        "kevin-ruskusky": 0.760079312623926,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 66.6811373996093,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 65.7633840052875,
+      "marginLabel": "R+65.8"
+    },
+    "08067": {
+      "name": "La Plata",
+      "fips": "08067",
+      "activeVoters": 41242,
+      "ballotsCast": 30132,
+      "raceTotal": 29704,
+      "votes": {
+        "heidi-ganahl": 10689,
+        "jared-polis": 18350,
+        "paul-noel-fiorino": 91,
+        "danielle-neuschwanger": 195,
+        "kevin-ruskusky": 379,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 35.98505251817937,
+        "jared-polis": 61.7761917586857,
+        "paul-noel-fiorino": 0.3063560463237274,
+        "danielle-neuschwanger": 0.6564772421222731,
+        "kevin-ruskusky": 1.2759224346889309,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 73.06144221909705,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 25.79113924050633,
+      "marginLabel": "D+25.8"
+    },
+    "08065": {
+      "name": "Lake",
+      "fips": "08065",
+      "activeVoters": 4887,
+      "ballotsCast": 3040,
+      "raceTotal": 2975,
+      "votes": {
+        "heidi-ganahl": 991,
+        "jared-polis": 1899,
+        "paul-noel-fiorino": 16,
+        "danielle-neuschwanger": 17,
+        "kevin-ruskusky": 52,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 33.3109243697479,
+        "jared-polis": 63.831932773109244,
+        "paul-noel-fiorino": 0.5378151260504201,
+        "danielle-neuschwanger": 0.5714285714285714,
+        "kevin-ruskusky": 1.7478991596638656,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 62.20585226110088,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 30.521008403361343,
+      "marginLabel": "D+30.5"
+    },
+    "08069": {
+      "name": "Larimer",
+      "fips": "08069",
+      "activeVoters": 255784,
+      "ballotsCast": 180424,
+      "raceTotal": 176328,
+      "votes": {
+        "heidi-ganahl": 66749,
+        "jared-polis": 105588,
+        "paul-noel-fiorino": 489,
+        "danielle-neuschwanger": 1247,
+        "kevin-ruskusky": 2249,
+        "paul-willmon": 1,
+        "zachary-varon": 5
+      },
+      "shares": {
+        "heidi-ganahl": 37.85502018964657,
+        "jared-polis": 59.88158432013066,
+        "paul-noel-fiorino": 0.27732407785490676,
+        "danielle-neuschwanger": 0.7072047547751916,
+        "kevin-ruskusky": 1.2754639081711356,
+        "paul-willmon": 0.0005671249035887663,
+        "zachary-varon": 0.002835624517943832
+      },
+      "turnout": 70.53764113470741,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 22.026564130484097,
+      "marginLabel": "D+22.0"
+    },
+    "08071": {
+      "name": "Las Animas",
+      "fips": "08071",
+      "activeVoters": 10342,
+      "ballotsCast": 6796,
+      "raceTotal": 6691,
+      "votes": {
+        "heidi-ganahl": 3071,
+        "jared-polis": 3411,
+        "paul-noel-fiorino": 25,
+        "danielle-neuschwanger": 135,
+        "kevin-ruskusky": 49,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 45.89747421910028,
+        "jared-polis": 50.97892691675385,
+        "paul-noel-fiorino": 0.37363622776864447,
+        "danielle-neuschwanger": 2.01763562995068,
+        "kevin-ruskusky": 0.7323270064265431,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 65.71262811835234,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 5.081452697653564,
+      "marginLabel": "D+5.1"
+    },
+    "08073": {
+      "name": "Lincoln",
+      "fips": "08073",
+      "activeVoters": 3072,
+      "ballotsCast": 2139,
+      "raceTotal": 2100,
+      "votes": {
+        "heidi-ganahl": 1608,
+        "jared-polis": 390,
+        "paul-noel-fiorino": 6,
+        "danielle-neuschwanger": 73,
+        "kevin-ruskusky": 23,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 76.57142857142857,
+        "jared-polis": 18.571428571428573,
+        "paul-noel-fiorino": 0.2857142857142857,
+        "danielle-neuschwanger": 3.4761904761904763,
+        "kevin-ruskusky": 1.0952380952380953,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 69.62890625,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 57.99999999999999,
+      "marginLabel": "R+58.0"
+    },
+    "08075": {
+      "name": "Logan",
+      "fips": "08075",
+      "activeVoters": 12160,
+      "ballotsCast": 8755,
+      "raceTotal": 8256,
+      "votes": {
+        "heidi-ganahl": 5925,
+        "jared-polis": 1860,
+        "paul-noel-fiorino": 21,
+        "danielle-neuschwanger": 368,
+        "kevin-ruskusky": 82,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 71.76598837209302,
+        "jared-polis": 22.52906976744186,
+        "paul-noel-fiorino": 0.2543604651162791,
+        "danielle-neuschwanger": 4.457364341085271,
+        "kevin-ruskusky": 0.9932170542635659,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.9983552631579,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 49.236918604651166,
+      "marginLabel": "R+49.2"
+    },
+    "08077": {
+      "name": "Mesa",
+      "fips": "08077",
+      "activeVoters": 107447,
+      "ballotsCast": 74421,
+      "raceTotal": 73551,
+      "votes": {
+        "heidi-ganahl": 40376,
+        "jared-polis": 30571,
+        "paul-noel-fiorino": 200,
+        "danielle-neuschwanger": 1570,
+        "kevin-ruskusky": 833,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 54.895242756726624,
+        "jared-polis": 41.56435670487145,
+        "paul-noel-fiorino": 0.2719201642397792,
+        "danielle-neuschwanger": 2.1345732892822666,
+        "kevin-ruskusky": 1.1325474840586804,
+        "paul-willmon": 0,
+        "zachary-varon": 0.001359600821198896
+      },
+      "turnout": 69.26298547190709,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 13.330886051855176,
+      "marginLabel": "R+13.3"
+    },
+    "08079": {
+      "name": "Mineral",
+      "fips": "08079",
+      "activeVoters": 865,
+      "ballotsCast": 726,
+      "raceTotal": 708,
+      "votes": {
+        "heidi-ganahl": 362,
+        "jared-polis": 320,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 12,
+        "kevin-ruskusky": 10,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 51.12994350282486,
+        "jared-polis": 45.19774011299435,
+        "paul-noel-fiorino": 0.5649717514124294,
+        "danielle-neuschwanger": 1.694915254237288,
+        "kevin-ruskusky": 1.4124293785310735,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 83.9306358381503,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 5.932203389830509,
+      "marginLabel": "R+5.9"
+    },
+    "08081": {
+      "name": "Moffat",
+      "fips": "08081",
+      "activeVoters": 8584,
+      "ballotsCast": 5468,
+      "raceTotal": 5418,
+      "votes": {
+        "heidi-ganahl": 4174,
+        "jared-polis": 1058,
+        "paul-noel-fiorino": 17,
+        "danielle-neuschwanger": 99,
+        "kevin-ruskusky": 70,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 77.03949796973053,
+        "jared-polis": 19.52750092284976,
+        "paul-noel-fiorino": 0.3137689184200812,
+        "danielle-neuschwanger": 1.8272425249169437,
+        "kevin-ruskusky": 1.2919896640826873,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 63.69990680335508,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 57.51199704688077,
+      "marginLabel": "R+57.5"
+    },
+    "08083": {
+      "name": "Montezuma",
+      "fips": "08083",
+      "activeVoters": 18991,
+      "ballotsCast": 12672,
+      "raceTotal": 12520,
+      "votes": {
+        "heidi-ganahl": 6772,
+        "jared-polis": 5187,
+        "paul-noel-fiorino": 40,
+        "danielle-neuschwanger": 371,
+        "kevin-ruskusky": 150,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 54.08945686900959,
+        "jared-polis": 41.4297124600639,
+        "paul-noel-fiorino": 0.3194888178913738,
+        "danielle-neuschwanger": 2.9632587859424917,
+        "kevin-ruskusky": 1.1980830670926517,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 66.72634405771156,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 12.659744408945686,
+      "marginLabel": "R+12.7"
+    },
+    "08085": {
+      "name": "Montrose",
+      "fips": "08085",
+      "activeVoters": 29855,
+      "ballotsCast": 21114,
+      "raceTotal": 20900,
+      "votes": {
+        "heidi-ganahl": 12835,
+        "jared-polis": 7529,
+        "paul-noel-fiorino": 34,
+        "danielle-neuschwanger": 312,
+        "kevin-ruskusky": 189,
+        "paul-willmon": 1,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 61.411483253588514,
+        "jared-polis": 36.02392344497608,
+        "paul-noel-fiorino": 0.1626794258373206,
+        "danielle-neuschwanger": 1.492822966507177,
+        "kevin-ruskusky": 0.9043062200956938,
+        "paul-willmon": 0.004784688995215311,
+        "zachary-varon": 0
+      },
+      "turnout": 70.721822140345,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 25.38755980861244,
+      "marginLabel": "R+25.4"
+    },
+    "08087": {
+      "name": "Morgan",
+      "fips": "08087",
+      "activeVoters": 17545,
+      "ballotsCast": 10280,
+      "raceTotal": 10154,
+      "votes": {
+        "heidi-ganahl": 7090,
+        "jared-polis": 2679,
+        "paul-noel-fiorino": 41,
+        "danielle-neuschwanger": 233,
+        "kevin-ruskusky": 108,
+        "paul-willmon": 0,
+        "zachary-varon": 3
+      },
+      "shares": {
+        "heidi-ganahl": 69.82469962576324,
+        "jared-polis": 26.383691156194605,
+        "paul-noel-fiorino": 0.4037817608824109,
+        "danielle-neuschwanger": 2.294662202087847,
+        "kevin-ruskusky": 1.063620248178058,
+        "paul-willmon": 0,
+        "zachary-varon": 0.029545006893834942
+      },
+      "turnout": 58.592191507552,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 43.441008469568644,
+      "marginLabel": "R+43.4"
+    },
+    "08089": {
+      "name": "Otero",
+      "fips": "08089",
+      "activeVoters": 12121,
+      "ballotsCast": 7335,
+      "raceTotal": 7246,
+      "votes": {
+        "heidi-ganahl": 4053,
+        "jared-polis": 2951,
+        "paul-noel-fiorino": 25,
+        "danielle-neuschwanger": 149,
+        "kevin-ruskusky": 67,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 55.93430858404636,
+        "jared-polis": 40.72591774772288,
+        "paul-noel-fiorino": 0.34501794093292854,
+        "danielle-neuschwanger": 2.0563069279602537,
+        "kevin-ruskusky": 0.9246480817002485,
+        "paul-willmon": 0,
+        "zachary-varon": 0.01380071763731714
+      },
+      "turnout": 60.51480900915765,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 15.208390836323488,
+      "marginLabel": "R+15.2"
+    },
+    "08091": {
+      "name": "Ouray",
+      "fips": "08091",
+      "activeVoters": 4526,
+      "ballotsCast": 3612,
+      "raceTotal": 3566,
+      "votes": {
+        "heidi-ganahl": 1255,
+        "jared-polis": 2242,
+        "paul-noel-fiorino": 5,
+        "danielle-neuschwanger": 29,
+        "kevin-ruskusky": 35,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 35.19349411104879,
+        "jared-polis": 62.87156477846326,
+        "paul-noel-fiorino": 0.14021312394840157,
+        "danielle-neuschwanger": 0.8132361189007292,
+        "kevin-ruskusky": 0.9814918676388109,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 79.80556783031373,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 27.678070667414474,
+      "marginLabel": "D+27.7"
+    },
+    "08093": {
+      "name": "Park",
+      "fips": "08093",
+      "activeVoters": 14482,
+      "ballotsCast": 10325,
+      "raceTotal": 10050,
+      "votes": {
+        "heidi-ganahl": 5271,
+        "jared-polis": 4463,
+        "paul-noel-fiorino": 26,
+        "danielle-neuschwanger": 127,
+        "kevin-ruskusky": 163,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 52.44776119402985,
+        "jared-polis": 44.407960199004975,
+        "paul-noel-fiorino": 0.25870646766169153,
+        "danielle-neuschwanger": 1.263681592039801,
+        "kevin-ruskusky": 1.6218905472636818,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.29540118768126,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 8.039800995024876,
+      "marginLabel": "R+8.0"
+    },
+    "08095": {
+      "name": "Phillips",
+      "fips": "08095",
+      "activeVoters": 2804,
+      "ballotsCast": 2005,
+      "raceTotal": 1969,
+      "votes": {
+        "heidi-ganahl": 1519,
+        "jared-polis": 384,
+        "paul-noel-fiorino": 5,
+        "danielle-neuschwanger": 51,
+        "kevin-ruskusky": 10,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 77.14575926866429,
+        "jared-polis": 19.502285424073136,
+        "paul-noel-fiorino": 0.25393600812595224,
+        "danielle-neuschwanger": 2.590147282884713,
+        "kevin-ruskusky": 0.5078720162519045,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.50499286733239,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 57.64347384459116,
+      "marginLabel": "R+57.6"
+    },
+    "08097": {
+      "name": "Pitkin",
+      "fips": "08097",
+      "activeVoters": 13735,
+      "ballotsCast": 9725,
+      "raceTotal": 9576,
+      "votes": {
+        "heidi-ganahl": 1907,
+        "jared-polis": 7565,
+        "paul-noel-fiorino": 10,
+        "danielle-neuschwanger": 21,
+        "kevin-ruskusky": 73,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 19.914369256474522,
+        "jared-polis": 78.99958228905597,
+        "paul-noel-fiorino": 0.10442773600668337,
+        "danielle-neuschwanger": 0.21929824561403508,
+        "kevin-ruskusky": 0.7623224728487886,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 70.80451401528941,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 59.08521303258145,
+      "marginLabel": "D+59.1"
+    },
+    "08099": {
+      "name": "Prowers",
+      "fips": "08099",
+      "activeVoters": 6920,
+      "ballotsCast": 4340,
+      "raceTotal": 4286,
+      "votes": {
+        "heidi-ganahl": 2847,
+        "jared-polis": 1139,
+        "paul-noel-fiorino": 14,
+        "danielle-neuschwanger": 247,
+        "kevin-ruskusky": 39,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 66.4255716285581,
+        "jared-polis": 26.574895006999533,
+        "paul-noel-fiorino": 0.3266448903406439,
+        "danielle-neuschwanger": 5.7629491367242185,
+        "kevin-ruskusky": 0.9099393373775081,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 62.71676300578035,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 39.85067662155856,
+      "marginLabel": "R+39.9"
+    },
+    "08101": {
+      "name": "Pueblo",
+      "fips": "08101",
+      "activeVoters": 110891,
+      "ballotsCast": 68110,
+      "raceTotal": 67512,
+      "votes": {
+        "heidi-ganahl": 28645,
+        "jared-polis": 36602,
+        "paul-noel-fiorino": 220,
+        "danielle-neuschwanger": 1408,
+        "kevin-ruskusky": 636,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 42.42949401587866,
+        "jared-polis": 54.21554686574238,
+        "paul-noel-fiorino": 0.3258679938381325,
+        "danielle-neuschwanger": 2.0855551605640477,
+        "kevin-ruskusky": 0.9420547458229648,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0014812181538096931
+      },
+      "turnout": 61.42067435589904,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 11.786052849863728,
+      "marginLabel": "D+11.8"
+    },
+    "08103": {
+      "name": "Rio Blanco",
+      "fips": "08103",
+      "activeVoters": 4231,
+      "ballotsCast": 3115,
+      "raceTotal": 3053,
+      "votes": {
+        "heidi-ganahl": 2408,
+        "jared-polis": 507,
+        "paul-noel-fiorino": 2,
+        "danielle-neuschwanger": 107,
+        "kevin-ruskusky": 29,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 78.87323943661971,
+        "jared-polis": 16.606616442843105,
+        "paul-noel-fiorino": 0.06550933508024893,
+        "danielle-neuschwanger": 3.504749426793318,
+        "kevin-ruskusky": 0.9498853586636096,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 73.62325691325927,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 62.26662299377661,
+      "marginLabel": "R+62.3"
+    },
+    "08105": {
+      "name": "Rio Grande",
+      "fips": "08105",
+      "activeVoters": 7982,
+      "ballotsCast": 5013,
+      "raceTotal": 4955,
+      "votes": {
+        "heidi-ganahl": 2485,
+        "jared-polis": 2140,
+        "paul-noel-fiorino": 17,
+        "danielle-neuschwanger": 263,
+        "kevin-ruskusky": 50,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 50.15136226034309,
+        "jared-polis": 43.18869828456105,
+        "paul-noel-fiorino": 0.343087790110999,
+        "danielle-neuschwanger": 5.307769929364278,
+        "kevin-ruskusky": 1.0090817356205852,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 62.80380856928088,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 6.962663975782038,
+      "marginLabel": "R+7.0"
+    },
+    "08107": {
+      "name": "Routt",
+      "fips": "08107",
+      "activeVoters": 19533,
+      "ballotsCast": 14055,
+      "raceTotal": 13873,
+      "votes": {
+        "heidi-ganahl": 4415,
+        "jared-polis": 9238,
+        "paul-noel-fiorino": 27,
+        "danielle-neuschwanger": 48,
+        "kevin-ruskusky": 145,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 31.824407121747278,
+        "jared-polis": 66.58977870684063,
+        "paul-noel-fiorino": 0.19462264830966627,
+        "danielle-neuschwanger": 0.3459958192171845,
+        "kevin-ruskusky": 1.0451957038852446,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.95515281830748,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 34.76537158509335,
+      "marginLabel": "D+34.8"
+    },
+    "08109": {
+      "name": "Saguache",
+      "fips": "08109",
+      "activeVoters": 4408,
+      "ballotsCast": 2818,
+      "raceTotal": 2766,
+      "votes": {
+        "heidi-ganahl": 1061,
+        "jared-polis": 1580,
+        "paul-noel-fiorino": 16,
+        "danielle-neuschwanger": 70,
+        "kevin-ruskusky": 39,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 38.358640636297906,
+        "jared-polis": 57.12219812002892,
+        "paul-noel-fiorino": 0.5784526391901663,
+        "danielle-neuschwanger": 2.5307302964569773,
+        "kevin-ruskusky": 1.4099783080260302,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 63.92921960072595,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 18.76355748373102,
+      "marginLabel": "D+18.8"
+    },
+    "08111": {
+      "name": "San Juan",
+      "fips": "08111",
+      "activeVoters": 746,
+      "ballotsCast": 566,
+      "raceTotal": 540,
+      "votes": {
+        "heidi-ganahl": 154,
+        "jared-polis": 372,
+        "paul-noel-fiorino": 5,
+        "danielle-neuschwanger": 4,
+        "kevin-ruskusky": 5,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 28.51851851851852,
+        "jared-polis": 68.88888888888889,
+        "paul-noel-fiorino": 0.9259259259259258,
+        "danielle-neuschwanger": 0.7407407407407408,
+        "kevin-ruskusky": 0.9259259259259258,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 75.87131367292224,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 40.370370370370374,
+      "marginLabel": "D+40.4"
+    },
+    "08113": {
+      "name": "San Miguel",
+      "fips": "08113",
+      "activeVoters": 5985,
+      "ballotsCast": 4117,
+      "raceTotal": 4086,
+      "votes": {
+        "heidi-ganahl": 815,
+        "jared-polis": 3199,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 24,
+        "kevin-ruskusky": 44,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 19.94615761135585,
+        "jared-polis": 78.29172785119923,
+        "paul-noel-fiorino": 0.09789525208027411,
+        "danielle-neuschwanger": 0.5873715124816447,
+        "kevin-ruskusky": 1.076847772883015,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 68.78863826232248,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 58.34557023984337,
+      "marginLabel": "D+58.3"
+    },
+    "08115": {
+      "name": "Sedgwick",
+      "fips": "08115",
+      "activeVoters": 1670,
+      "ballotsCast": 1186,
+      "raceTotal": 1162,
+      "votes": {
+        "heidi-ganahl": 807,
+        "jared-polis": 312,
+        "paul-noel-fiorino": 2,
+        "danielle-neuschwanger": 28,
+        "kevin-ruskusky": 13,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 69.44922547332186,
+        "jared-polis": 26.850258175559382,
+        "paul-noel-fiorino": 0.17211703958691912,
+        "danielle-neuschwanger": 2.4096385542168677,
+        "kevin-ruskusky": 1.1187607573149743,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 71.01796407185628,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 42.59896729776248,
+      "marginLabel": "R+42.6"
+    },
+    "08117": {
+      "name": "Summit",
+      "fips": "08117",
+      "activeVoters": 21352,
+      "ballotsCast": 14416,
+      "raceTotal": 14276,
+      "votes": {
+        "heidi-ganahl": 3650,
+        "jared-polis": 10383,
+        "paul-noel-fiorino": 35,
+        "danielle-neuschwanger": 41,
+        "kevin-ruskusky": 166,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 25.567385822359206,
+        "jared-polis": 72.73045671056319,
+        "paul-noel-fiorino": 0.24516671336508827,
+        "danielle-neuschwanger": 0.2871952927991034,
+        "kevin-ruskusky": 1.1627906976744187,
+        "paul-willmon": 0,
+        "zachary-varon": 0.007004763239002522
+      },
+      "turnout": 67.51592356687898,
+      "leaderId": "jared-polis",
+      "runnerUpId": "heidi-ganahl",
+      "margin": 47.163070888203976,
+      "marginLabel": "D+47.2"
+    },
+    "08119": {
+      "name": "Teller",
+      "fips": "08119",
+      "activeVoters": 19024,
+      "ballotsCast": 13710,
+      "raceTotal": 13550,
+      "votes": {
+        "heidi-ganahl": 8430,
+        "jared-polis": 4843,
+        "paul-noel-fiorino": 26,
+        "danielle-neuschwanger": 100,
+        "kevin-ruskusky": 150,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 62.2140221402214,
+        "jared-polis": 35.74169741697417,
+        "paul-noel-fiorino": 0.1918819188191882,
+        "danielle-neuschwanger": 0.7380073800738007,
+        "kevin-ruskusky": 1.107011070110701,
+        "paul-willmon": 0,
+        "zachary-varon": 0.007380073800738008
+      },
+      "turnout": 72.06686291000841,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 26.472324723247233,
+      "marginLabel": "R+26.5"
+    },
+    "08121": {
+      "name": "Washington",
+      "fips": "08121",
+      "activeVoters": 3293,
+      "ballotsCast": 2429,
+      "raceTotal": 2389,
+      "votes": {
+        "heidi-ganahl": 1971,
+        "jared-polis": 314,
+        "paul-noel-fiorino": 4,
+        "danielle-neuschwanger": 81,
+        "kevin-ruskusky": 19,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 82.50313938886563,
+        "jared-polis": 13.143574717455003,
+        "paul-noel-fiorino": 0.1674340728338217,
+        "danielle-neuschwanger": 3.390539974884889,
+        "kevin-ruskusky": 0.7953118459606531,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 73.76252657151534,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 69.35956467141064,
+      "marginLabel": "R+69.4"
+    },
+    "08123": {
+      "name": "Weld",
+      "fips": "08123",
+      "activeVoters": 210704,
+      "ballotsCast": 130363,
+      "raceTotal": 128483,
+      "votes": {
+        "heidi-ganahl": 72542,
+        "jared-polis": 52186,
+        "paul-noel-fiorino": 361,
+        "danielle-neuschwanger": 1622,
+        "kevin-ruskusky": 1771,
+        "paul-willmon": 0,
+        "zachary-varon": 1
+      },
+      "shares": {
+        "heidi-ganahl": 56.46038775557856,
+        "jared-polis": 40.617046613170615,
+        "paul-noel-fiorino": 0.2809710234038745,
+        "danielle-neuschwanger": 1.2624238226068818,
+        "kevin-ruskusky": 1.3783924721558494,
+        "paul-willmon": 0,
+        "zachary-varon": 0.0007783130842212589
+      },
+      "turnout": 61.87020654567546,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 15.843341142407946,
+      "marginLabel": "R+15.8"
+    },
+    "08125": {
+      "name": "Yuma",
+      "fips": "08125",
+      "activeVoters": 5750,
+      "ballotsCast": 5312,
+      "raceTotal": 3964,
+      "votes": {
+        "heidi-ganahl": 3079,
+        "jared-polis": 656,
+        "paul-noel-fiorino": 5,
+        "danielle-neuschwanger": 185,
+        "kevin-ruskusky": 39,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "shares": {
+        "heidi-ganahl": 77.67406659939455,
+        "jared-polis": 16.548940464177598,
+        "paul-noel-fiorino": 0.12613521695257315,
+        "danielle-neuschwanger": 4.667003027245207,
+        "kevin-ruskusky": 0.9838546922300706,
+        "paul-willmon": 0,
+        "zachary-varon": 0
+      },
+      "turnout": 92.38260869565217,
+      "leaderId": "heidi-ganahl",
+      "runnerUpId": "jared-polis",
+      "margin": 61.12512613521696,
+      "marginLabel": "R+61.1"
+    }
+  },
+  "missing": [],
+  "sources": [
+    {
+      "name": "2022 General Election Turnout, active voters",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html",
+      "retrievedAt": "2026-10-10"
+    },
+    {
+      "name": "2022 General Election Results, Governor/Lieutenant Governor",
+      "publisher": "Colorado Secretary of State",
+      "url": "https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html",
+      "retrievedAt": "2026-10-10"
+    }
+  ],
+  "buildId": "69d5205b-1597-4f3b-9c28-42aaf2fab281"
+}

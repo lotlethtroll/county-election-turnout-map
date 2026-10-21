@@ -1,0 +1,374 @@
+﻿
+
+
+County Election and Turnout Map: Project Requirements Specification
+
+Andrew Stimson
+American Military University
+ITCC498: Computer Technology Advanced Capstone
+Professor Michael Tomcho
+October 3, 2026
+
+1. Introduction
+1.1 Purpose
+This document specifies how the County Election and Turnout Map (CETM) will meet the requirements set out in the requirements analysis (Stimson, 2026b). The requirements analysis described what the system must do from the user’s point of view. This specification takes each of those requirements and states it precisely enough to design, build, and test against, including the exact calculations, data rules, limits, and screen behavior. Every specification keeps the ID of the requirement it develops (for example, FR-3.2), so the two documents can be read side by side and each item can be traced into the design document.
+1.2 Scope
+The scope is unchanged from the requirements analysis. The first version covers Colorado’s 64 counties and the certified results and turnout of the 2022 and 2024 general elections, limited to the top-of-ticket race in each: Governor in 2022 and President in 2024. Other states and primary elections are designed for but not loaded in the first version. Precinct-level results, other races and ballot measures, demographic data, and trend charts remain out of scope.
+One change follows instructor feedback on the requirements analysis. A working prototype is not required for this project, so objective OBJ-5, which called for a working version at a public web address by the end of the course, has been removed. This specification describes the complete system as designed. Hosting details are still specified because they shape the design, not because a deployed site is a course deliverable.
+1.3 Intended Audience and Use
+This document has four readers. The course instructor uses it to evaluate whether the system is planned completely enough to design. The classmate reviewing it acts as the customer and checks that nothing a user would need is missing. The developer uses it during the design phase, since every design decision has to trace back to a numbered specification here. The Data Maintainer uses Sections 5 and 6 to understand exactly which files the system accepts and how each value is calculated.
+The CETM itself is intended for members of the public who want to understand how their county and their state voted and how many people turned out, without reading spreadsheets or PDF reports. Its likely users include voters checking their own county, students and teachers comparing counties or elections, and local reporters confirming a figure. It is an unofficial reference tool for reading certified results, not a source of official results or a tool for counting, auditing, or certifying an election. The site states this on every view (FR-4.3).
+1.4 Why the Details Matter
+Colorado’s own published files show why the requirements need this level of detail. For the 2022 general election, the Secretary of State’s turnout page calculates turnout as a share of active voters and reports 66.24% statewide, while the Governor results page for the same election calculates turnout as a share of all registered voters and reports 58.39% (Colorado Secretary of State, n.d.-b, n.d.-c). Both pages count 2,543,316 ballots cast, yet only 2,508,830 votes were cast for Governor, because some voters skipped that race. A system that copied whichever turnout column it found first, or divided candidate votes by ballots cast, would publish numbers that disagree with the official ones. The specifications below fix exactly which number is used for every value the site shows.
+1.5 Definitions
+Terms defined in the requirements analysis keep the same meaning here, including turnout, which is ballots cast divided by active registered voters. Table 1 adds terms that appear only in this specification.
+Table 1
+Additional Terms Used in This Specification
+Term
+Definition
+Adapter
+A small program written for one state that reads that state’s official files and converts them into the common county result format. Each state has its own adapter because each state publishes results differently.
+Build
+The step the Data Maintainer runs on their own computer to read source files, calculate values, run the validation checks, and write the data files the website loads.
+Choropleth
+A map in which each area is filled with a color based on a data value. The CETM map is a choropleth of counties.
+FIPS code
+The federal five-digit county code, made of a two-digit state code (08 for Colorado) and a three-digit county number. It is the key that joins each county’s results to its shape, and it is unique nationwide, so it works for every state.
+GeoJSON
+A text format for map shapes that a web browser can read directly. County boundaries are converted to GeoJSON during the build.
+State configuration
+A file that describes one state: its name, FIPS code, election office, county list, and elections. The website and the build read state details from this file instead of from program code.
+Validation report
+The list of checks the build runs on new data, with a pass or fail result for each, shown to the Data Maintainer.
+
+1.6 Overview
+Section 2 describes the structure of the system, its data sources, and the assumptions and dependencies it relies on. Sections 3 and 4 develop each functional and nonfunctional requirement from the requirements analysis into a detailed specification with an acceptance criterion. Section 5 defines the data the system stores and how each value is calculated, Section 6 specifies the external interfaces, and Section 7 ties the acceptance criteria to the project objectives. Claude, an AI assistant (Anthropic, 2026), was used to help organize and format this document. I directed all work, made the project decisions, and reviewed and revised all content.
+2. System Overview
+2.1 System Structure
+The CETM has two parts that never run at the same time. The first is a data pipeline that the Data Maintainer runs on their own computer. It reads the official files for a state, converts them with that state’s adapter, calculates turnout and margins, runs the validation checks, and writes small data files. The second is the public website, which is made only of HTML, CSS, JavaScript, and those data files. The website has no server, database, or user accounts. Its map is drawn with D3.js, whose geographic module projects county shapes onto an SVG map and whose scale functions turn each county’s value into a fill color (Observable, n.d.). Because the site is entirely static files, it can be hosted through GitHub Pages, which publishes HTML, CSS, and JavaScript directly from a project repository and is available on public repositories with a free account (GitHub, n.d.).
+2.2 Data Sources for Colorado
+Colorado’s 2022 figures come from two pages in the Secretary of State’s 2022 abstract. The turnout page lists active voters, ballots cast, and turnout for every county, and the Governor results page lists each county’s votes for every Governor ticket (Colorado Secretary of State, n.d.-b, n.d.-c). The 2024 figures come from the files listed in the state results archive: a spreadsheet of 2024 general election turnout by precinct, which the adapter sums to county totals, and the 2023 to 2024 biennial abstract of votes, published as a PDF (Colorado Secretary of State, n.d.-a). County shapes come from the U.S. Census Bureau’s 1:500,000 county boundary file, a national file from which any single state can be extracted. The Census Bureau offers it as a shapefile, geodatabase, KML, or geopackage download (U.S. Census Bureau, 2026), none of which a browser reads directly, so the build converts the selected state’s counties to GeoJSON.
+2.3 Design Constraints
+The public site must be entirely static files so it has no server to run or pay for.
+All tools must be free and open source, and all data must come from public government sources.
+No state name, county count, file name, or other state-specific value may be written into the website code. All of it comes from the state configuration and data files.
+Only certified results may be published.
+The project is designed and documented by one developer within the course term.
+2.4 Assumptions and Dependencies
+Every user need in the requirements analysis rests on things outside the developer’s control: what states publish, how they publish it, and the services the site is built on. Table 2 lists each assumption and dependency, the user need it supports, and what the design does if it turns out to be false. The pattern across the table is the same: when an outside condition fails, the system either stops before publishing (protecting accuracy, OBJ-1) or shows “No data” (protecting honesty with the user), rather than showing a number that might be wrong.
+Table 2
+Assumptions and Dependencies
+ID
+Assumption or dependency
+User need it supports
+If it does not hold
+A-1
+Each state publishes certified county-level results and turnout publicly. Colorado does, through the Secretary of State’s abstract and results archive (Colorado Secretary of State, n.d.-a).
+Seeing accurate official numbers for one’s own county (OBJ-1).
+That state cannot be added. FR-5.5 applies only to states that meet this assumption.
+A-2
+Each state reports active registered voters by county, which the turnout definition requires. Colorado reports them on its turnout pages (Colorado Secretary of State, n.d.-c).
+Comparing turnout fairly between counties.
+Turnout for that state shows “No data” (FR-6.2) instead of switching to a different formula without telling the user.
+A-3
+County names in a state’s files can be matched to the Census county list.
+Seeing the right numbers on the right county.
+The build stops and lists the unmatched county (FR-5.2), as in Scenario 2 of the requirements analysis.
+A-4
+Colorado’s 2024 precinct turnout can be summed to county totals that agree with the biennial abstract, and the abstract’s PDF tables can be extracted accurately.
+Trusting the 2024 figures as much as the 2022 figures.
+The abstract figures take priority, and the totals checks stop the build until the difference is resolved (FR-5.2, FR-5.3).
+A-5
+County boundaries are the same for both elections in the first version, so one boundary file serves both.
+Comparing the same county across elections (FR-3.4).
+The state configuration can list a boundary file per election, and FR-3.4 shows “No data” for a county that did not exist in one election.
+A-6
+Visitors use a current browser with JavaScript enabled (NFR-6.2).
+Using the site without installing anything (NFR-5.1).
+The page shows a short message explaining that JavaScript is required, with a link to the state election office’s official results.
+D-1
+Official source files from the state election office, needed only when the Data Maintainer runs the build.
+Getting certified numbers rather than estimates (NFR-7.3).
+Published data stays in place, because the site never contacts the state while visitors use it (Section 6.3).
+D-2
+The Census Bureau’s national 1:500,000 county boundary file (U.S. Census Bureau, 2026).
+Seeing every county drawn correctly (FR-1.1).
+The converted GeoJSON file is kept in the repository, so the site does not depend on the Census site after the build.
+D-3
+The D3.js library for drawing the map (Observable, n.d.).
+A responsive, readable map on any screen (NFR-1.3).
+D3 is shipped with the site files rather than loaded from an outside server, so a third-party outage cannot break the map.
+D-4
+GitHub Pages for hosting (GitHub, n.d.).
+Free, secure access at any time (NFR-7.1, NFR-7.2).
+Because the site is only static files, it can be moved to any other static host without changes.
+D-5
+A Data Maintainer who runs the build after each certified election.
+Seeing current results.
+The footer shows when the data was last updated (FR-4.4), so users can tell when it is out of date.
+
+3. Functional Specifications
+Table 3 develops each functional requirement from the requirements analysis. The ID matches the original requirement, the specification states exactly how the system will meet it, and the acceptance criterion states the condition the finished system must satisfy for that requirement to count as met.
+Table 3
+Functional Specifications
+ID
+Specification
+Acceptance Criterion
+FR-1 Map Display
+FR-1.1
+The map draws one shape for every county listed in the selected state’s configuration (64 for Colorado), using that state’s county GeoJSON file, and scales the projection to fit the map area at any screen width.
+The number of county shapes drawn equals the number of counties in the state configuration.
+FR-1.2
+In margin view, counties use a blue scale for a Democratic lead and a red scale for a Republican lead, with four shades by lead size: under 5, 5 to 10, 10 to 20, and 20 or more points. In turnout view, counties use a single-color scale with six shades whose range is set from the lowest and highest county turnout in the loaded election, not from 0 to 100%. Colorado’s 2022 county turnout runs from 57.16% in Adams County to 92.38% in Yuma County (Colorado Secretary of State, n.d.-c), so a 0 to 100% scale would wash most counties into the same shade.
+Each county’s color falls in the shade range that contains its value.
+FR-1.3
+The legend lists every shade with its range in words and numbers (for example, “D+10 to D+20” or “70.0% to 75.0%”) and changes whenever the view or election changes.
+The legend matches the map in every view and election.
+FR-1.4
+Pointing to a county or moving keyboard focus to it shows a tooltip with the county name and its value in the site’s standard format (for example, D+4.2 or 71.3%). The tooltip stays visible while the pointer is over it and closes with the Escape key.
+The tooltip appears by mouse, touch, and keyboard, and closes with Escape.
+FR-1.5
+When no county is selected, a summary panel shows statewide turnout, the statewide leader, and the statewide margin, calculated from county totals as described in Section 5.3.
+Statewide values equal the official statewide figures.
+FR-2 Choosing What to View
+FR-2.1
+An election selector lists every loaded election for the state, newest first. The site opens on the newest general election, which is the 2024 general election for Colorado.
+The newest general election is shown on first load, and the list runs newest to oldest.
+FR-2.2
+A two-button control switches between Margin and Turnout. Margin is the default view.
+Switching views changes the map, legend, and tooltips together.
+FR-2.3
+In a general election, each county’s margin is the leading candidate’s share of the votes in the race minus the runner-up’s share, labeled with the leader’s party (D+4.2, R+11.0). An exact tie is labeled “Tie” and shown in neutral gray.
+Each county’s margin equals the value recalculated by hand from the source votes.
+FR-2.4
+When a primary election is selected, a party selector appears. Counties are colored by the leading candidate, using one fixed color per candidate, with shade by lead size, and margins are labeled by candidate name. The selector is hidden for general elections.
+With primary data loaded, the party selector appears and counties are colored by candidate.
+FR-2.5
+A status line above the map always reads in the form “Colorado, 2024 General Election, President, Margin view” and is announced to screen readers when it changes.
+The status line matches every selection and is read aloud by a screen reader when it changes.
+FR-2.6
+A state selector appears only when the configuration lists more than one state. It is hidden in the first version.
+The selector is hidden with one state configured and shown with two or more.
+FR-3 County Details
+FR-3.1
+A county is selected by clicking or tapping it, by pressing Enter or Space when it has keyboard focus, or by choosing it from a searchable county list. The list gives a large target for counties that are small on screen.
+Each of the three selection methods opens the same county.
+FR-3.2
+The details panel shows the county name, turnout to one decimal place, ballots cast, and active registered voters, with thousands separators.
+Every value matches the source files for that county and election.
+FR-3.3
+A results table lists every candidate with party, votes, and share of the race to one decimal place, sorted by votes. The leader is marked with the word “Leader,” not by color alone, and the margin appears under the table.
+Every value matches the source files, and the leader is identified in text.
+FR-3.4
+When the election changes while a county is selected, the panel stays open and shows the same county in the new election. If that county has no data in the new election, the panel says so.
+Scenario 1 from the requirements analysis completes as written.
+FR-3.5
+A Close button and the Escape key close the panel and return keyboard focus to the county on the map.
+Both methods close the panel and return focus to the county.
+FR-4 Information and Transparency
+FR-4.1
+An About section lists each data source by name and publisher, with a link and the date it was retrieved.
+Every source is listed, and every link opens the cited page.
+FR-4.2
+The About section explains, in plain language, that turnout is ballots cast divided by active registered voters and that margin is the leader’s share of the race minus the runner-up’s share.
+Both formulas are stated in plain language with no unexplained terms.
+FR-4.3
+Every page view shows a footer stating that the site is unofficial, is not affiliated with any government, and that official results are available from the state election office, with a link to that office.
+The notice and link appear in every view.
+FR-4.4
+The footer shows the date the election data was last updated, read from the data file.
+The date shown matches the date of the most recent data build.
+FR-5 Managing Election Data
+FR-5.1
+The Data Maintainer places the official files in the state’s source folder and runs a single build command. The state’s adapter reads the files and converts them to the common format in Section 5.2.
+One command builds the Colorado 2022 and 2024 data from the official files.
+FR-5.2
+The build checks that every configured county appears exactly once; that county ballots cast add up to the official statewide ballots cast; that each candidate’s county votes add up to that candidate’s official statewide total; that no count is missing or negative; and that every turnout value is between 0 and 100%. It writes a validation report listing each failed check by county.
+Every failed check is listed in the report with the county it affects, as in Scenario 2.
+FR-5.3
+If any check fails, the build stops without changing the published data files, so the site keeps showing the previous data.
+Published files are unchanged after any failed build.
+FR-5.4
+A new election, general or primary, is added by listing it in the state configuration and supplying its source files. No website code changes.
+A new election appears in the selector with no change to website code.
+FR-5.5
+A new state is added by writing its configuration, extracting its counties from the national Census file by state FIPS code, and writing its adapter. The new state uses the same map, views, and details panel as Colorado.
+A new state works with every function and no change to website code.
+FR-6 Handling Problems
+FR-6.1
+If a map or data file fails to load, the map area shows the message “The map could not be loaded. Check your connection and try again.” with a Try Again button that requests the files again.
+The message appears whenever a file fails to load, and Try Again reloads it.
+FR-6.2
+A county with no data is filled with neutral gray and a diagonal pattern, labeled “No data” in the legend, tooltip, and details panel, and never colored as if its value were zero.
+A county with no data never takes a color from the value scale.
+
+4. Nonfunctional Specifications
+Table 4 develops each nonfunctional requirement the same way. The accessibility specifications use WCAG 2.2 Level AA success criteria (World Wide Web Consortium [W3C], 2024).
+Table 4
+Nonfunctional Specifications
+ID
+Specification
+Acceptance Criterion
+NFR-1 Usability
+NFR-1.1
+A first-time visitor can complete three tasks without help: find a county’s turnout, find a county’s winner, and compare that county across both elections.
+First-time test users complete all three tasks without help (OBJ-2).
+NFR-1.2
+Labels, legends, and messages use everyday words. The terms turnout, margin, and active registered voter each have an info button beside them that opens their definition.
+Every term used on screen is either everyday language or defined on the site.
+NFR-1.3
+The layout works from a 320-pixel-wide phone screen to a large monitor with no sideways scrolling, as WCAG 1.4.10 requires. The details panel sits beside the map on wide screens and below it on narrow ones.
+No sideways scrolling or lost content at 320, 768, or 1440 pixels wide.
+NFR-1.4
+The site meets WCAG 2.2 Level AA. Text contrast is at least 4.5:1, and county borders, legend shades, and controls are at least 3:1 against neighboring colors (WCAG 1.4.3, 1.4.11). Every control and county can be reached by keyboard with a visible focus indicator (WCAG 2.1.1, 2.4.7), and every target is at least 24 by 24 pixels or available from the county list (WCAG 2.5.8).
+WAVE reports no errors (OBJ-3), and every function works by keyboard and screen reader.
+NFR-1.5
+Every value shown by color is also shown as text in the tooltip, the details panel, and the county list (WCAG 1.4.1).
+No information is lost when the site is viewed in grayscale.
+NFR-1.6
+Democratic results use blue and Republican results use red; other parties use neutral colors. Candidates are listed by vote count, and the site contains no commentary on results.
+No view uses other colors for the two major parties or contains commentary.
+NFR-2 Reliability
+NFR-2.1
+Every displayed value either comes directly from a certified source file or is calculated from one using the rules in Section 5.3, and passes the checks in FR-5.2.
+Every value checked against the Secretary of State pages matches exactly (OBJ-1).
+NFR-2.2
+Because the site is static, it stays available whenever the host is available. Updates replace all data files in a single publish, so visitors never see a mix of old and new data.
+An update never leaves old and new data files published together.
+NFR-3 Performance
+NFR-3.1
+The map appears within three seconds. The first view downloads less than 1 MB in total, and each state’s county shape file is simplified to 500 KB or less.
+Load time and download size stay under the stated limits on a throttled connection.
+NFR-3.2
+The map and details panel update within half a second of any change in election, view, or selected county. Election files are loaded only when first selected and then kept in memory.
+Every update completes within half a second.
+NFR-4 Supportability
+NFR-4.1
+A maintainer guide gives step-by-step instructions for updating data, adding an election, adding a state, and writing an adapter.
+Someone other than the developer can complete each task using only the guide.
+NFR-4.2
+The website reads every state and election only through the configuration and data files, so new states and elections appear in the same map, views, and details panel.
+No state-specific value appears in the website code (OBJ-4).
+NFR-5 Implementation
+NFR-5.1
+The site runs in a standard browser with nothing to install and no account.
+The site works in a private browser window with nothing installed.
+NFR-5.2
+The site uses D3.js, which is released under the open-source ISC license (Observable, n.d.), along with plain HTML, CSS, and JavaScript. The build uses only free tools.
+Every tool used is free and carries an open-source license.
+NFR-6 Interface
+NFR-6.1
+Adapters read the formats states publish: spreadsheets, CSV files, and saved web tables. When results are published only as PDF, as with Colorado’s 2024 abstract, the adapter extracts the tables to CSV, and the totals checks in FR-5.2 catch any extraction error.
+The Colorado adapter reads every Colorado source file type.
+NFR-6.2
+The site works in current versions of Chrome, Edge, Firefox, and Safari on desktop and on at least one phone.
+Every function works in each listed browser.
+NFR-7 Operational
+NFR-7.1
+The site is served over HTTPS at no cost to visitors.
+The site address loads only over HTTPS.
+NFR-7.2
+Hosting on GitHub Pages from a public repository costs nothing (GitHub, n.d.).
+Hosting costs nothing.
+NFR-7.3
+Each election in the configuration is marked as certified. The build refuses to publish any election not marked certified.
+The build refuses any election not marked certified.
+NFR-8 Packaging
+NFR-8.1
+The system is packaged as one project repository containing the website files, build scripts, adapters, state configurations, and the maintainer guide. The same repository can be published directly through GitHub Pages.
+The repository contains every listed part.
+NFR-9 Legal
+NFR-9.1
+Only public government data is used, and every source is credited in the About section.
+Every data source used is credited in the About section.
+NFR-9.2
+The site sets no cookies, loads no analytics or third-party tracking scripts, and stores no personal information. Voter data is used only as county totals. The About section notes that GitHub Pages logs visitor IP addresses for security purposes (GitHub, n.d.), which the site itself cannot turn off.
+The site makes no third-party requests and stores no data in the browser.
+NFR-9.3
+The site uses no state seal or logo, and its name and wording do not suggest it is official.
+No page or image uses a government seal, logo, or claim of official status.
+
+5. Data Specifications
+5.1 State Configuration
+Each state has one configuration file containing the state name, its two-digit FIPS code, the name and web address of its election office, its list of counties by FIPS code and name, and its list of elections. Each election entry records an ID, the election date, whether it is a general or primary election, the party for a primary, the race shown, whether the results are certified, the source files, and the adapter that reads them. This file is what makes a new state or election a data change rather than a code change (FR-5.4, FR-5.5, NFR-4.2).
+5.2 County Result Record
+For each election, the build writes one record per county with these fields: county FIPS code, county name, active registered voters, ballots cast, votes for each candidate, total votes in the race, turnout, leader, runner-up, margin in points, and margin label. Active registered voters may be empty for a state that does not report them, in which case turnout for that state is shown as “No data” under FR-6.2 rather than calculated another way.
+5.3 Calculation Rules
+Turnout equals ballots cast divided by active registered voters, times 100. It is always calculated, never copied from a source turnout column, because Colorado’s own 2022 pages report turnout two different ways (66.24% and 58.39%).
+A candidate’s share equals that candidate’s votes divided by the total votes cast in the race, not by ballots cast. In 2022, Colorado counted 2,543,316 ballots but 2,508,830 votes for Governor (Colorado Secretary of State, n.d.-b), so dividing by ballots would understate every candidate.
+Margin equals the leader’s share minus the runner-up’s share, labeled with the leader’s party in a general election or name in a primary.
+Statewide values are calculated from county totals and must match the official statewide figures (FR-5.2).
+Values are stored at full precision and rounded to one decimal place only when displayed.
+5.4 Colorado Source Files
+Table 5
+Colorado Source Files by Election
+Election
+Race
+Turnout source
+Results source
+2022 general
+Governor
+2022 General Election Turnout page, by county (Colorado Secretary of State, n.d.-c)
+2022 General Election Results, Governor page, by county (Colorado Secretary of State, n.d.-b)
+2024 general
+President
+2024 general election turnout by precinct spreadsheet, summed to counties (Colorado Secretary of State, n.d.-a)
+2023 to 2024 biennial abstract of votes, PDF (Colorado Secretary of State, n.d.-a)
+All
+County shapes
+Not applicable
+Census Bureau 1:500,000 county boundary file (U.S. Census Bureau, 2026)
+
+6. External Interface Requirements
+The CETM has four kinds of external interface: the screens people use, the files and software the system exchanges data with, the network connection between the visitor’s browser and the host, and the devices people use to reach it. Table 6 summarizes each interface and the functional and nonfunctional requirements it serves, and the subsections below give the details.
+Table 6
+External Interfaces and Related Requirements
+Interface
+Description
+Related requirements
+Public web page
+The single page visitors use: header, map area, details panel, county list, footer, and About section.
+FR-1 to FR-4, FR-6, NFR-1, NFR-6.2, NFR-9.3
+Data Maintainer build command
+One command that reads official files, runs the adapter and checks, and writes the validation report and data files.
+FR-5, NFR-4.1, NFR-7.3
+Official source files (input)
+Spreadsheets, CSV files, saved web tables, and PDF tables from a state election office, read by that state’s adapter.
+FR-5.1, NFR-6.1, NFR-9.1
+Census boundary file (input)
+The national 1:500,000 county file, filtered by state FIPS code and converted to GeoJSON.
+FR-1.1, FR-5.5, NFR-3.1
+Site data files (output)
+The state list, state configuration, county GeoJSON, and one data file per election, read by the web page.
+FR-1.1, FR-2.1, FR-4.4, NFR-4.2
+HTTPS connection
+The browser requests the static files from the host over HTTPS. No other network traffic occurs.
+NFR-3.1, NFR-7.1, NFR-9.2
+Visitor devices
+Phones, tablets, and computers using touch, mouse, keyboard, or a screen reader.
+FR-1.4, FR-3.1, NFR-1.3, NFR-1.4
+
+6.1 User Interfaces
+The page has five areas. The header holds the site name, the status line (FR-2.5), and the election and view selectors, plus the state and party selectors when they apply (FR-2.4, FR-2.6). The map area holds the map, its legend, and the statewide summary (FR-1.1 to FR-1.5). The details panel opens beside the map on screens wider than a tablet and below it on narrower screens (FR-3, NFR-1.3). The county list sits below the map with a search box (FR-3.1). The footer holds the unofficial-site notice, the data update date, and a link to the About section (FR-4.3, FR-4.4). All controls are standard HTML buttons, select menus, and links, so they work with keyboards and screen readers without custom code (NFR-1.4). Error and “No data” messages appear in the map area in plain language (FR-6.1, FR-6.2, NFR-1.2).
+The Data Maintainer’s interface is a command run in a terminal on their own computer. It prints each validation check with a pass or fail result and the county affected, and it ends with a clear statement of whether the data was published or the previous data was kept (FR-5.2, FR-5.3). The maintainer guide documents every command and message (NFR-4.1).
+6.2 Software Interfaces
+On the input side, each state’s adapter reads that state’s official file formats and produces the county result record in Section 5.2, and the boundary step reads the Census file and writes GeoJSON (NFR-6.1). On the output side, the build writes plain JSON and GeoJSON files with a fixed structure, so the web page never needs to know which state or source format the data came from (NFR-4.2). In the browser, the page uses D3.js to project the county shapes, draw them as SVG, and map values to colors (Observable, n.d.). D3 is served with the site’s own files. The site uses no other outside libraries, services, or application programming interfaces (NFR-5.2, NFR-9.2).
+6.3 Communications Interfaces
+The only network communication is the visitor’s browser requesting the site’s static files from the host over HTTPS (NFR-7.1). On first load, the browser downloads the state list, the selected state’s configuration and county shapes, and the newest election’s data file, staying under the 1 MB first-view limit (NFR-3.1). Other election files are downloaded only when selected and then kept in memory (NFR-3.2). The site sends no data back to any server, sets no cookies, and calls no outside services while it runs (NFR-9.2), so it keeps working even if a state election office later moves or renames its files.
+6.4 Hardware Interfaces
+The CETM has no special hardware. It must work on phones, tablets, and computers with screens from 320 pixels wide upward (NFR-1.3), and it must accept touch, mouse, and keyboard input, with every target at least 24 by 24 pixels or reachable from the county list (FR-3.1, NFR-1.4). The Data Maintainer needs only an ordinary computer able to run the free build tools (NFR-5.2).
+7. Acceptance Criteria and Project Objectives
+This project is graded on its planning and documentation, not on a finished product, so this section defines acceptance rather than reporting test results. Each specification above has an acceptance criterion, and together those criteria define when a built version of the CETM would meet the four remaining project objectives. OBJ-1, accurate official data, is met by the build validation in FR-5.2 and the value checks in NFR-2.1. OBJ-2, ease of understanding, is met by the test-user criterion in NFR-1.1. OBJ-3, usability by everyone, is met by the accessibility criteria in NFR-1.4. OBJ-4, readiness for other states and primaries, is met by the criteria in FR-5.4, FR-5.5, and NFR-4.2, which require new states and elections to work without changing website code. OBJ-5 was removed as described in Section 1.2.
+8. Future Enhancements
+The following are outside this version and will be discussed as possible enhancements in the final reflection: loading real data for states beyond Colorado and for primary elections, which the design already supports; precinct-level results; races other than the top of the ticket and ballot measures; population and demographic information; and trend charts across several elections.
+References
+Anthropic. (2026). Claude (Opus 5.5 version) [Large language model]. https://claude.ai/
+Colorado Secretary of State. (n.d.-a). Election results archives. Retrieved October 3, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Archives.html
+Colorado Secretary of State. (n.d.-b). 2022 general election results [Governor and lieutenant governor results by county]. Retrieved October 3, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html
+Colorado Secretary of State. (n.d.-c). 2022 general election turnout. Retrieved October 3, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html
+GitHub. (n.d.). What is GitHub Pages? GitHub Docs. Retrieved October 3, 2026, from https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+Observable. (n.d.). What is D3? D3 by Observable. Retrieved October 3, 2026, from https://d3js.org/what-is-d3
+Stimson, A. (2026a). Capstone project proposal: Colorado election and turnout map [Unpublished course paper]. American Military University.
+Stimson, A. (2026b). Requirements analysis document: County election and turnout map [Unpublished course paper]. American Military University.
+U.S. Census Bureau. (2026, April 23). Cartographic boundary files. https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
+World Wide Web Consortium. (2024). Web content accessibility guidelines (WCAG) 2.2 (W3C Recommendation). https://www.w3.org/TR/WCAG22/

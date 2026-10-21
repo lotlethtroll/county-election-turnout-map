@@ -1,0 +1,748 @@
+﻿
+
+
+County Election and Turnout Map: Project Design Specification
+
+Andrew Stimson
+American Military University
+ITCC498: Computer Technology Advanced Capstone
+Professor Michael Tomcho
+October 10, 2026
+
+1. Introduction
+1.1 Purpose
+This document describes how the County Election and Turnout Map (CETM) will be built. The requirements analysis set out what the system must do from a user’s point of view (Stimson, 2026b), and the requirements specification stated each of those 50 requirements precisely enough to design against (Stimson, 2026c). This design specification takes the next step and answers the construction questions: which languages and tools are used, how the system is divided into parts, what every data file contains, what every screen and control looks like and how it behaves, and how each program component does its job. It is organized around the four models of a software design: data design, architectural design, interface design, and component-level design.
+1.2 Scope
+The scope is unchanged from the requirements specification. The first version covers Colorado’s 64 counties and the certified results and turnout of two general elections, limited to the top of the ticket in each: Governor in 2022 and President in 2024. The design supports other states and primary elections from the start, but only Colorado data is loaded in the first version. Because the course does not require a working prototype, this document designs the complete system rather than a partial build. Anything that is built later has to follow it.
+1.3 Intended Audience
+The course instructor reads this document to judge whether the system is designed completely enough to build. The classmate reviewing it acts as the customer and checks that the design delivers what the requirements promised and that nothing a user would need has been left out. The developer, who is also the author, uses it as the build plan, and the Data Maintainer uses Sections 3.2, 4, and 5.7 to understand how election data moves from an official file to the published map.
+1.4 Traceability
+Every design decision in this document points back to at least one numbered requirement from the requirements specification, written as its original ID (for example, FR-2.3 or NFR-1.4). Section 7 reverses that link: it lists all 50 requirements and names the design elements that satisfy each one, so a reader can confirm that no requirement was dropped between the two documents.
+1.5 Definitions
+Terms defined in the requirements analysis and the requirements specification keep their meaning here, including turnout, margin, adapter, build, state configuration, and validation report. Table 1 adds terms that appear only in the design.
+Table 1
+Additional Terms Used in This Design
+Term
+Definition
+Component
+One JavaScript or Python file with a single job, such as drawing the legend or checking county totals. Components are numbered C-1 through C-25 in Section 6.
+Module
+A JavaScript file that lists what it imports from other files and what it makes available to them. Every front-end component is a module, so the browser loads only what the page uses.
+Store
+The one object that holds the current view: state, election, Margin or Turnout view, party, and selected county. Every screen component reads from the store and redraws when it changes.
+Staging folder
+A temporary folder where the build writes new data files. The files move into the published data folder only after every validation check passes.
+Vendored
+A library file copied into the project and served from the site itself rather than loaded from another company’s server.
+Roving focus
+A keyboard pattern where a group of items, here the county shapes, is a single Tab stop and the arrow keys move between items inside it.
+
+1.6 Overview
+Section 2 names the languages and tools and explains why each was chosen. Section 3 gives the architectural design, Section 4 the data design, Section 5 the interface design, and Section 6 the component-level design. Section 7 traces every requirement to the design, Section 8 records the main design decisions and the alternatives that were rejected, and Section 9 is the revision history. Claude, an AI assistant (Anthropic, 2026), was used to help organize and format this document. I directed all work, made the project decisions, and reviewed and revised all content.
+2. Languages, Tools, and Platform
+The CETM uses JavaScript almost everywhere, so one language covers the website, the build pipeline, and every state adapter. The public site is written in HTML, CSS, and JavaScript modules with no front-end framework, as the requirements specification limits it to plain web code plus D3.js (NFR-5.2). D3 is a free, open-source JavaScript library for data graphics that works directly with web standards such as SVG and describes itself as a low-level toolbox rather than a charting library (Observable, n.d.-a). That fits this project, because the map needs exact control over every county shape, color, and keyboard behavior. The build pipeline runs on Node.js, a free, open-source, cross-platform JavaScript runtime (Node.js, n.d.), on the Data Maintainer’s own computer.
+One step needs a second language. Colorado publishes its 2024 vote totals only inside the biennial abstract, which is a PDF, and its 2024 turnout as a precinct spreadsheet (Colorado Secretary of State, n.d.-a). Python’s pdfplumber library extracts text and tables from PDFs and is released under the MIT license, and its documentation notes that it works best on machine-generated files rather than scans (Singer-Vine, n.d.). A short Python script handles only that extraction and writes a CSV file, after which the JavaScript adapter takes over. Table 2 lists every language and tool.
+Table 2
+Languages and Tools
+Item
+Used for
+Reason
+Requirements
+HTML5
+Page structure and every control
+Standard buttons, select menus, and links work with assistive technology without custom code.
+NFR-1.4, NFR-5.1
+CSS3
+Layout, colors, focus styles, the two screen layouts
+Grid layout and a media query switch between the wide and narrow layouts with no script.
+NFR-1.3, NFR-1.4
+JavaScript (ES modules)
+All front-end components
+Runs in every current browser with nothing to install and no build step for the site itself.
+NFR-5.1, NFR-6.2
+D3.js (vendored copy)
+Map projection, county paths, color scales
+Its projection module fits a GeoJSON shape to a given size (Observable, n.d.-b), and its quantize and threshold scales turn values into color shades (Observable, n.d.-c, n.d.-d). Shipped with the site under assumption D-3.
+FR-1.1, FR-1.2, NFR-5.2
+Node.js
+Build command, adapters, calculations, validation, publishing
+Same language as the site, free, and runs on Windows, macOS, and Linux (Node.js, n.d.).
+FR-5.1, NFR-5.2
+mapshaper
+Filtering, converting, and simplifying county boundaries
+An MPL 2.0 licensed command-line tool that reads Shapefiles and writes GeoJSON, with simplification and filtering built in (Bloch, n.d.).
+FR-5.5, NFR-3.1
+SheetJS
+Reading XLSX spreadsheets in the adapter
+Reads spreadsheet files from disk in Node.js. Its documentation recommends installing from its own release file because the npm registry copy is out of date (SheetJS, n.d.), so a pinned copy is kept in the project.
+NFR-6.1
+Python 3 with pdfplumber
+Extracting tables from PDF result files
+Extracts tables from machine-generated PDFs (Singer-Vine, n.d.). Used only by adapters for states that publish results as PDF.
+NFR-6.1
+Git and GitHub Pages
+Version control and free hosting
+GitHub Pages publishes HTML, CSS, and JavaScript straight from a repository and is free for public repositories (GitHub, n.d.-a). Sites on github.io are served over HTTPS, which can be enforced (GitHub, n.d.-b).
+NFR-7.1, NFR-7.2, NFR-8.1
+
+3. Architectural Design
+3.1 Architectural Style
+The CETM follows the two-part structure set in the requirements specification. Part 1 is a build pipeline that runs only on the Data Maintainer’s computer. It is a pipe-and-filter design: each stage takes the output of the one before it, does one job, and passes the result on, which makes every stage small enough to check on its own. Part 2 is a static single-page application that runs in the visitor’s browser. It is a state-driven design: user actions change one shared store, and every screen component redraws from the store. The two parts share nothing at run time except the published data files, so the website never reads an official source file and the build never touches the website code (NFR-4.2). Figure 1 shows how the parts connect.
+Figure 1
+System Architecture
+
+3.2 Build Pipeline
+The Data Maintainer runs the pipeline with a single command for one state, such as npm run build -- co (FR-5.1). Figure 2 shows its seven stages. The pipeline stops at the first stage that fails, writes the validation report, and leaves the published data folder exactly as it was (FR-5.3). Stage 6 writes every new file to a staging folder, and stage 7 replaces the whole published folder for that state in one step, so the site never holds a mix of old and new files (NFR-2.2).
+Figure 2
+Build Pipeline Stages
+
+Table 3
+Build Pipeline Stages
+Stage
+What it does
+Requirements
+1. Load configuration
+Reads the state configuration and confirms every required field is present and every election marked for publishing is also marked certified.
+NFR-7.3, FR-5.4
+2. Extract
+Runs the state’s adapter, which reads each official file and returns rows in the common county result format.
+FR-5.1, NFR-6.1
+3. Normalize
+Matches each row’s county name to a five-digit FIPS code using the county list in the configuration, ignoring case, spacing, and the word County.
+FR-5.2
+4. Calculate
+Computes turnout, candidate shares, leader, runner-up, margin, and statewide totals using the rules in Section 4.6.
+FR-2.3, FR-1.5, NFR-2.1
+5. Validate
+Runs every check in FR-5.2 and records pass or fail for each in the validation report.
+FR-5.2
+6. Write to staging
+Writes the election files, the public copy of the configuration, and the county shapes to the staging folder.
+FR-5.3
+7. Publish
+Swaps the staging folder into the published data folder and records the build date that the footer shows.
+NFR-2.2, FR-4.4
+
+3.3 Website Architecture
+The website loads one HTML page and one starting module. The starting module reads the list of states, loads the chosen state’s configuration, county shapes, and newest election, and then hands control to the store. Figure 3 shows what happens after that. A user action reaches a control or the map, which asks the store to change. If the change needs an election file that has not been loaded, the store asks the Data Loader for it and waits. When the data is ready, the store tells every screen component, and each one redraws only its own part of the page. Nothing on the page changes until the new data is in hand, which is how the map, legend, panel, and status line always agree with each other (FR-3.4, NFR-3.2).
+Figure 3
+Website Update Flow
+
+3.4 Repository Layout
+The whole system is one repository (NFR-8.1). The website files sit at the top level so GitHub Pages can publish them directly. The build, adapters, and untouched source files sit in folders the website never requests.
+cetm/
+  index.html                 the single page
+  css/site.css               layout, colors, focus styles
+  js/                        front-end components C-1 to C-15
+  vendor/d3.min.js           vendored D3 (assumption D-3)
+  data/                      PUBLISHED: written only by the Publisher
+    states.json              list of available states
+    co/config.json           public copy of the Colorado configuration
+    co/counties.geojson      simplified county shapes
+    co/2022-general-governor.json
+    co/2024-general-president.json
+  states/co/                 Colorado source of truth, never published
+    config.json              full configuration with source file paths
+    sources/                 official files, stored unchanged
+  build/                     pipeline components C-16 to C-25
+    adapters/co.js
+    extract_pdf_tables.py
+    reports/                 validation reports
+  docs/maintainer-guide.md   NFR-4.1
+  package.json               build command and pinned tool versions
+
+3.5 Deployment
+The repository is public and published through GitHub Pages with HTTPS enforced (NFR-7.1, NFR-7.2). A data update is a single commit containing the new data folder, so the published site moves from the old data to the new data in one step. Because the site is only static files, it could move to any other static host without code changes, as dependency D-4 in the requirements specification allows.
+4. Data Design
+4.1 Data Model
+Figure 4 shows the six kinds of records the system keeps and how they relate. A state has many counties and many elections. An election has many candidates and one result record for each county. Each county result holds one vote count for each candidate. The county’s five-digit FIPS code is the key that joins results to shapes, because county names are spelled differently from one source to the next while the FIPS code is unique nationwide. Every record is stored as JSON, which the browser reads natively, and there is no database.
+Figure 4
+Data Model
+
+4.2 State Configuration
+Each state has one configuration file, which is what makes a new state or a new election a data change instead of a code change (FR-5.4, FR-5.5, NFR-4.2). The Data Maintainer edits the full version in the states folder. The Publisher writes a public copy to the data folder with the source file paths and adapter names removed, since visitors have no use for them. Table 4 lists the fields.
+Table 4
+State Configuration Fields
+Field
+Type
+Content
+stateFips
+Text
+Two-digit state code, "08" for Colorado.
+abbr, name
+Text
+Postal abbreviation and full name, used in the status line and selector (FR-2.5, FR-2.6).
+officeName, officeUrl
+Text
+The state election office and its web address, used in the footer link (FR-4.3).
+counties
+List
+Every county as a FIPS code, a display name, and any other spellings found in that state’s files. The build checks results against this list (FR-5.2).
+elections
+List
+One entry per election, with the fields in the rows below.
+  id
+Text
+Short unique name, also the data file name, for example 2024-general-president.
+  label, date
+Text
+Name shown in the selector and the election date. The selector sorts by date, newest first (FR-2.1).
+  type, party
+Text
+general or primary, and the party for a primary (FR-2.4).
+  race
+Text
+The race shown, for example Governor or President.
+  certified
+True or false
+The build refuses to publish an election marked false (NFR-7.3).
+  adapter, sourceFiles
+Text, list
+Which adapter reads the election and which official files it reads. Full version only.
+  sources
+List
+Name, publisher, link, and retrieval date of each source, shown in the About section (FR-4.1, NFR-9.1).
+candidateColors
+List
+For primaries only, one fixed color per candidate (FR-2.4).
+
+4.3 Election Data File
+The build writes one file per election. The file carries everything the website needs for that election, already calculated, so the browser only displays values and never computes them (NFR-2.1). Table 5 shows its layout.
+Table 5
+Election Data File Fields
+Field
+Content
+schemaVersion
+Format version number, so a future change to the layout can be detected.
+electionId, label, race, type, party
+Copied from the configuration.
+builtAt
+Date the build ran, shown in the footer as the data update date (FR-4.4).
+candidates
+Each candidate’s ID, name, party, and official statewide vote total.
+statewide
+Active voters, ballots cast, votes in the race, turnout, leader, and margin for the whole state (FR-1.5).
+counties
+One record per county, keyed by FIPS code. Each record holds the county name, active voters, ballots cast, total votes in the race, each candidate’s votes and share, turnout, leader, runner-up, margin in points, and margin label such as D+4.2 or Tie.
+missing
+List of configured counties with no data in this election, which the map draws as No data (FR-6.2).
+
+Colorado’s published 2022 figures show how a county record is filled. The Secretary of State reports 296,776 active voters and 169,626 ballots cast in Adams County, for a turnout of 57.16%, and 5,750 active voters and 5,312 ballots in Yuma County, for 92.38% (Colorado Secretary of State, n.d.-c). The build calculates both percentages from the counts and compares them with the published figures as a check, rather than copying the published column.
+4.4 County Shape File
+The Census Bureau offers its cartographic boundary files as Shapefile, geodatabase, KML, and geopackage downloads, at scales of 1:500,000, 1:5,000,000, and 1:20,000,000 (U.S. Census Bureau, 2026). The Boundary Processor uses the 1:500,000 national county file, keeps only the counties whose code starts with the state’s FIPS code, simplifies the shapes until the file is 500 KB or smaller (NFR-3.1), and writes GeoJSON. Each county shape keeps two properties, its FIPS code and its name. The national file is downloaded once and reused for every state.
+4.5 Validation Report
+Each build writes a plain text report to the reports folder and prints the same text on screen. The report lists every check from FR-5.2 with PASS or FAIL. Each failure names the county and both numbers involved, so the Data Maintainer can find the problem in the source file. The report ends with either "Published" or "Not published: the site still shows the previous data."
+4.6 Calculation Rules
+The Calculator applies the rules fixed in the requirements specification. Colorado’s own 2022 pages show why each rule matters. The turnout page divides ballots by active voters and reports 66.24% statewide, while the Governor page divides by all 4,355,778 registered voters and reports 58.39%, and both count 2,543,316 ballots against only 2,508,830 votes for Governor (Colorado Secretary of State, n.d.-b, n.d.-c).
+Turnout = ballots cast / active registered voters x 100. If a state does not report active voters, turnout is left empty and shown as No data, never calculated another way (assumption A-2).
+Candidate share = candidate votes / total votes in the race x 100, never divided by ballots cast.
+Margin = leader’s share minus runner-up’s share. In a general election the label uses the leader’s party (D+4.2, R+11.0). In a primary it uses the leader’s name. Equal shares give the label Tie.
+Statewide values are calculated from the county totals and must equal the official statewide figures (FR-5.2).
+All values are stored at full precision and rounded to one decimal place only when displayed.
+4.7 View State
+The store holds one small object describing what the user is looking at. Table 6 lists its fields. Every screen component reads these fields and nothing else to decide what to draw, which is what keeps them consistent (FR-2.5, FR-3.4).
+Table 6
+View State Fields
+Field
+Starting value
+Changed by
+stateAbbr
+First state in states.json (CO)
+State selector, shown only with two or more states (FR-2.6)
+electionId
+Newest election by date
+Election selector (FR-2.1)
+view
+margin
+Margin and Turnout buttons (FR-2.2)
+party
+Empty
+Party selector, shown only for primaries (FR-2.4)
+selectedFips
+Empty
+Map, county list, Close button, Escape key (FR-3.1, FR-3.5)
+loadStatus
+loading
+Data Loader: loading, ready, or error (FR-6.1)
+
+5. Interface Design
+5.1 Screen Layout
+Figure 5 shows the two layouts. On screens 960 pixels wide and wider, the details panel sits beside the map. Below 960 pixels, every area stacks in one column and the panel appears under the map when a county is selected. The layout reflows down to 320 pixels with no sideways scrolling, which is the width WCAG 2.2 uses for its reflow criterion (World Wide Web Consortium [W3C], 2024; NFR-1.3). The map itself is an SVG drawing that resizes to its area, and the projection is refit to the county shapes each time the area changes size (FR-1.1).
+Figure 5
+Screen Layouts for Wide and Narrow Screens
+
+5.2 Controls
+Every control is a standard HTML element, so keyboards and screen readers handle it without extra code. Table 7 lists each control, the element it is built from, and how it behaves.
+Table 7
+Controls
+Control
+Element
+Behavior
+Requirements
+Election selector
+Labeled select menu
+Lists the state’s elections newest first. Changing it loads that election and redraws the page.
+FR-2.1
+Margin / Turnout
+Two buttons with aria-pressed
+The pressed button shows the current view. Margin is pressed on first load.
+FR-2.2
+Party selector
+Labeled select menu
+Present only when a primary is selected.
+FR-2.4
+State selector
+Labeled select menu
+Present only when states.json lists two or more states.
+FR-2.6
+Status line
+Paragraph with role="status"
+Reads in the form "Colorado, 2024 General Election, President, Margin view." The role lets screen readers announce the change without moving focus, which is the technique WCAG lists for status messages (W3C Web Accessibility Initiative [WAI], n.d.-a).
+FR-2.5
+County shapes
+SVG paths with role="button" and a text label
+One Tab stop for the whole map. Arrow keys move to the next or previous county in alphabetical order, Home and End jump to the first and last, Enter or Space selects. Each label reads in the form "[County name] County, D+4.2."
+FR-3.1, NFR-1.4
+County list
+Search box above a list of buttons
+Typing filters the list by name. Choosing a county selects it on the map. Each button is at least 24 by 24 pixels.
+FR-3.1, NFR-1.4
+Close
+Button in the details panel
+Closes the panel, as does Escape, and returns focus to that county on the map.
+FR-3.5
+Definition buttons
+Buttons with aria-expanded
+Placed beside turnout, margin, and active registered voter. Each opens a one-sentence definition.
+NFR-1.2
+Try Again
+Button in the error message
+Requests the failed files again.
+FR-6.1
+
+5.3 Color and Legend
+Margin view uses a D3 threshold scale, which places shade boundaries at chosen values (Observable, n.d.-d). The boundaries fall at 5, 10, and 20 points on each side, giving four blue shades for a Democratic lead and four red shades for a Republican lead (FR-1.2). Turnout view uses a D3 quantize scale, which divides a range into equal segments, one for each shade (Observable, n.d.-c). Its range runs from the lowest to the highest county turnout in the loaded election, so for Colorado’s 2022 election it spans 57.16% to 92.38% instead of 0 to 100%. The legend reads its ranges from the same scale the map uses, so the two always match (FR-1.3).
+County borders are white, 1 pixel wide. Every fill color was checked against white with the WCAG contrast formula and reaches at least 3:1, which is the non-text contrast level WCAG 2.2 sets for parts of a graphic needed to understand it (W3C, 2024; NFR-1.4). The lightest shades were darkened until they passed. Table 8 lists the colors and their measured contrast with white.
+Table 8
+Map Colors and Contrast Against White Borders
+Shade
+Margin (D)
+Margin (R)
+Contrast with white (D / R)
+Lead under 5 points
+#5B8FC7
+#D9605A
+3.39:1 / 3.64:1
+Lead 5 to 10 points
+#3B73B5
+#C2403A
+4.88:1 / 5.14:1
+Lead 10 to 20 points
+#245A99
+#9E2B26
+7.01:1 / 7.43:1
+Lead 20 points or more
+#123F73
+#6E1A17
+10.58:1 / 11.52:1
+Turnout, six shades (low to high)
+#8C7BB8 to #2B1A57
+Not used
+3.72:1 rising to 15.13:1
+Tie and No data
+#8A8A8A
+#8A8A8A
+3.45:1; No data adds a diagonal line pattern
+
+Color never carries information alone (NFR-1.5). Every value shown by color also appears as text in the tooltip, the details panel, and the county list, which follows the WCAG rule that color cannot be the only means of conveying information (W3C, 2024). Text is #1A1A1A on white, a contrast of 17.4:1. The keyboard focus indicator is a 3-pixel black outline with a 2-pixel white ring outside it. The white ring stands out against every map shade, since all of them pass 3:1 against white, and the black outline stands out against the white page.
+5.4 Tooltip and Details Panel
+The tooltip appears beside the pointer or the focused county and shows the county name and its value in the current view, in the form "[County name] County, D+4.2" or "[County name] County, 71.3%" (FR-1.4). It stays open while the pointer is over it and closes with Escape. The details panel shows, from top to bottom, the county name, turnout to one decimal place, ballots cast, active registered voters, a results table of every candidate sorted by votes with party, votes, and share, the word Leader beside the leading candidate, and the margin under the table (FR-3.2, FR-3.3). Numbers use thousands separators.
+5.5 Messages
+Table 9
+Messages Shown to Users
+Situation
+Message text
+Requirements
+A file fails to load
+The map could not be loaded. Check your connection and try again. [Try Again]
+FR-6.1
+County has no data
+No data (legend, tooltip, and panel)
+FR-6.2
+Selected county has no data in the new election
+No results for this county in the selected election.
+FR-3.4
+Footer, every view
+This is an unofficial site and is not affiliated with any government. Official results are available from [state election office link]. Data last updated [date].
+FR-4.3, FR-4.4
+
+5.6 About Section
+The About section sits below the county list and is reached from a footer link. It lists every data source by name, publisher, link, and retrieval date (FR-4.1, NFR-9.1), defines turnout and margin in plain words (FR-4.2), and states that the site sets no cookies and runs no analytics, while noting that GitHub Pages logs visitor IP addresses for security purposes (GitHub, n.d.-a; NFR-9.2). The page uses no state seal or logo (NFR-9.3).
+5.7 Data Maintainer Interface
+The Data Maintainer works through a command line, described step by step in the maintainer guide (NFR-4.1). A normal update has four steps: place the new official files in the state’s sources folder, list the election in the state configuration, run the build command, and read the report. The report for a failed build looks like the example below, which shows the situation from Scenario 2 in the requirements analysis, where one county name in a source file does not match the configuration.
+CETM build: Colorado (08), election 2024-general-president
+[PASS] Configuration loaded, election marked certified
+[PASS] Source files found (2 of 2)
+[FAIL] County names: 1 row did not match any configured county
+       turnout file, row 12: "Clear Creek Co."
+[FAIL] Every configured county appears exactly once: 63 of 64
+       missing: 08019 Clear Creek
+Not published: the site still shows the previous data.
+
+The fix is to add "Clear Creek Co." to that county’s other spellings in the configuration and run the build again. No code changes.
+5.8 External Interfaces
+The interfaces set out in the requirements specification are built as follows. The software interface on the input side is the adapter, which reads XLSX through SheetJS, saved HTML tables through the Node.js file system, and PDF tables through the pdfplumber script (NFR-6.1). The communications interface is HTTPS GET requests from the browser to GitHub Pages, and nothing else: the site calls no outside service while it runs (NFR-9.2). The hardware interface requires only a browser on a phone, tablet, or computer with touch, mouse, or keyboard input (NFR-5.1, NFR-6.2).
+6. Component-Level Design
+6.1 Component List
+Table 10 lists every component. Components C-1 through C-15 are front-end modules in the js folder. Components C-16 through C-25 make up the build pipeline. Each has one job, and the requirements column shows which requirements it carries.
+Table 10
+Components
+ID
+File
+Responsibility
+Requirements
+Website (browser)
+C-1
+main.js
+Starts the app: loads states.json, the state configuration, county shapes, and newest election, then creates the store and every view.
+FR-2.1, NFR-3.1
+C-2
+store.js
+Holds the view state, applies changes, and notifies subscribers after any needed data is loaded.
+FR-2.5, FR-3.4, NFR-3.2
+C-3
+dataLoader.js
+Fetches JSON files, keeps each loaded election in memory, and reports load errors.
+NFR-3.2, FR-6.1
+C-4
+scales.js
+Builds the threshold scale for margin and the quantize scale for turnout from the loaded election.
+FR-1.2
+C-5
+mapView.js
+Draws the county paths, applies fills, refits the projection on resize, and runs roving focus.
+FR-1.1, FR-1.2, FR-3.1, FR-6.2, NFR-1.4
+C-6
+legend.js
+Draws each shade with its range in words and numbers from the C-4 scale.
+FR-1.3
+C-7
+tooltip.js
+Shows and hides the tooltip on hover and focus, closes on Escape.
+FR-1.4
+C-8
+controls.js
+Builds the election, view, party, and state controls and shows or hides the conditional ones.
+FR-2.1, FR-2.2, FR-2.4, FR-2.6
+C-9
+statusLine.js
+Writes the status line text into the role="status" element.
+FR-2.5
+C-10
+detailsPanel.js
+Shows the selected county’s figures and results table, handles Close and Escape and returns focus.
+FR-3.2, FR-3.3, FR-3.4, FR-3.5
+C-11
+countyList.js
+Builds the searchable list of counties and selects a county when one is chosen.
+FR-3.1, NFR-1.5
+C-12
+summary.js
+Shows statewide turnout, leader, and margin when no county is selected.
+FR-1.5
+C-13
+about.js
+Builds the About section, footer, and definition buttons from the configuration and data file.
+FR-4.1 to FR-4.4, NFR-1.2, NFR-9.2
+C-14
+format.js
+Formats numbers, percentages, and margin labels the same way everywhere.
+FR-1.4, FR-3.2
+C-15
+messages.js
+Shows the load error with Try Again and the No data messages.
+FR-6.1, FR-6.2
+Build pipeline (Data Maintainer’s computer)
+C-16
+build/cli.js
+Reads the state argument, runs stages 1 to 7 in order, and stops at the first failure.
+FR-5.1, FR-5.3
+C-17
+build/config.js
+Loads and checks the state configuration and refuses uncertified elections.
+FR-5.4, NFR-7.3
+C-18
+build/adapters/co.js
+Reads Colorado’s HTML tables, XLSX spreadsheet, and extracted PDF tables into common rows, summing 2024 precincts to counties.
+FR-5.1, NFR-6.1
+C-19
+build/extract_pdf_tables.py
+Extracts the needed tables from a PDF abstract into CSV with pdfplumber.
+NFR-6.1
+C-20
+build/normalize.js
+Matches county names to FIPS codes and reports any row it cannot match.
+FR-5.2
+C-21
+build/calculate.js
+Applies the calculation rules in Section 4.6 to every county and to the state.
+FR-2.3, FR-1.5, NFR-2.1
+C-22
+build/validate.js
+Runs every FR-5.2 check and returns a list of results.
+FR-5.2
+C-23
+build/boundaries.js
+Runs mapshaper to filter, simplify, and convert the county shapes.
+FR-5.5, NFR-3.1
+C-24
+build/publish.js
+Writes to staging and swaps staging into the published folder.
+FR-5.3, NFR-2.2, FR-4.4
+C-25
+build/report.js
+Writes and prints the validation report.
+FR-5.2
+
+6.2 Store (C-2)
+The store is the center of the website. It is the only place view state can change, which means no two components can ever disagree about what is selected. When an election change needs a file that is not in memory, the store waits for the Data Loader before telling anyone, so the page goes from the old view to the new one in a single redraw.
+function setState(changes):
+    next = copy of current state with changes applied
+    if next.electionId differs from current.electionId:
+        loadStatus = loading
+        data = await dataLoader.getElection(next.stateAbbr, next.electionId)
+        if data failed: loadStatus = error; notify subscribers; stop
+        if next.selectedFips has no record in data: keep it selected
+            (the details panel shows "No results for this county")
+    current = next; loadStatus = ready
+    for each subscriber: subscriber.render(current, data)
+
+6.3 Data Loader (C-3)
+The Data Loader requests an election file only the first time it is selected and keeps it in memory after that (NFR-3.2). If a request fails, it does not keep the failure, so the Try Again button simply asks again (FR-6.1).
+cache = empty map
+function getElection(state, id):
+    key = state + "/" + id
+    if key in cache: return cache[key]
+    response = fetch("data/" + state + "/" + id + ".json")
+    if response is not OK: return failure     (nothing is cached)
+    cache[key] = parsed response
+    return cache[key]
+
+6.4 Scales and Map View (C-4, C-5)
+C-4 builds a fresh scale each time the election or view changes. For margin, it turns each county’s margin into a signed number, positive for a Democratic lead and negative for a Republican lead, and passes it to a threshold scale with boundaries at -20, -10, -5, 0, 5, 10, and 20. A tie skips the scale and gets the neutral gray. For turnout, it finds the lowest and highest county turnout and builds a six-shade quantize scale across that range. C-5 then sets each county’s fill from its record, or the No data pattern when there is no record. When the map area changes size, C-5 calls the D3 projection’s fitSize method with the new width and height and the state’s county shapes, which resets the projection so the whole state fills the area (Observable, n.d.-b).
+function fillFor(county, view, scale):
+    if county has no record:      return NO_DATA_PATTERN
+    if view is turnout:
+        if turnout is empty:      return NO_DATA_PATTERN
+        return scale(turnout)
+    if marginLabel is "Tie":      return TIE_GRAY
+    signed = margin if leader party is D, otherwise -margin
+    return scale(signed)
+
+6.5 Calculator (C-21)
+The Calculator works from vote counts only. It never reads a published percentage, which is what keeps Colorado’s two different turnout figures from leaking into the map (Section 4.6).
+for each county record r:
+    r.raceTotal = sum of r.votes
+    r.turnout   = r.activeVoters ? r.ballotsCast / r.activeVoters * 100 : empty
+    for each candidate c: r.share[c] = r.votes[c] / r.raceTotal * 100
+    order candidates by votes, highest first
+    r.leader = first; r.runnerUp = second
+    r.margin = r.share[leader] - r.share[runnerUp]
+    r.marginLabel = margin is 0 ? "Tie"
+                    : (general ? party of leader : name of leader) + "+" + margin
+statewide = same steps applied to the sum of every county
+
+6.6 Validator (C-22)
+The Validator runs every check in FR-5.2 and always runs all of them, even after one fails, so the Data Maintainer sees every problem in one report instead of one per run.
+checks:
+    every configured FIPS appears exactly once in the results
+    no row is left unmatched by the normalizer
+    sum of county ballotsCast = official statewide ballots cast
+    for each candidate: sum of county votes = official statewide votes
+    no count is missing or negative
+    every turnout is between 0 and 100
+    the election is marked certified
+publish only if every check passed
+
+6.7 Colorado Adapter (C-18, C-19)
+The Colorado adapter handles the three file types Colorado uses. For 2022, it reads the turnout table and the Governor table saved from the Secretary of State pages, taking active voters and ballots from the turnout page and candidate votes from the Governor page (Colorado Secretary of State, n.d.-b, n.d.-c). For 2024, it reads the precinct turnout spreadsheet through SheetJS and sums precincts to county totals, then reads the presidential table that C-19 extracted from the biennial abstract PDF (Colorado Secretary of State, n.d.-a). If the PDF extraction misreads a number, the statewide totals check in C-22 fails, so an extraction error cannot reach the published site.
+6.8 Publisher (C-24)
+write every new file to data/.staging-<state>/
+rename data/<state>/ to data/.previous-<state>/
+rename data/.staging-<state>/ to data/<state>/
+delete data/.previous-<state>/
+(if any step fails, rename .previous back and stop)
+
+7. Requirements Traceability
+Table 11 lists all 50 requirements from the requirements specification with the design elements that satisfy each one. Every requirement has at least one component and one section of this document behind it.
+Table 11
+Requirements Traceability
+Requirement
+Design elements
+FR-1 Map Display
+FR-1.1
+C-1, C-5; county shapes in Section 4.4; projection refit in Section 6.4
+FR-1.2
+C-4, C-5; threshold and quantize scales and colors in Section 5.3
+FR-1.3
+C-6; legend ranges read from the C-4 scale
+FR-1.4
+C-7, C-14; tooltip in Section 5.4
+FR-1.5
+C-12, C-21; statewide record in the election file (Table 5)
+FR-2 Choosing What to View
+FR-2.1
+C-8; elections sorted by date (Table 4); newest election loaded by C-1
+FR-2.2
+C-8; view field in the store (Table 6)
+FR-2.3
+C-21; margin rule in Section 4.6
+FR-2.4
+C-8; type, party, and candidateColors in the configuration
+FR-2.5
+C-9; role="status" element (Table 7)
+FR-2.6
+C-8; states.json; selector hidden with one state
+FR-3 County Details
+FR-3.1
+C-5 roving focus, C-11 county list (Table 7)
+FR-3.2
+C-10, C-14; panel contents in Section 5.4
+FR-3.3
+C-10; results table with the word Leader
+FR-3.4
+C-2 keeps selectedFips across elections; message in Table 9
+FR-3.5
+C-10; Close button and Escape return focus
+FR-4 Information and Transparency
+FR-4.1
+C-13; sources field in the configuration; About section (Section 5.6)
+FR-4.2
+C-13; plain-language definitions in the About section
+FR-4.3
+C-13; footer text in Table 9; officeUrl in the configuration
+FR-4.4
+C-24 writes builtAt; C-13 shows it in the footer
+FR-5 Managing Election Data
+FR-5.1
+C-16, C-18; single build command (Section 3.2)
+FR-5.2
+C-20, C-22, C-25; checks in Section 6.6; report in Section 4.5
+FR-5.3
+C-16 stops on failure; C-24 staging swap (Section 6.8)
+FR-5.4
+C-17; new election added as a configuration entry
+FR-5.5
+C-17, C-23; new state added as configuration, shapes, and an adapter
+FR-6 Handling Problems
+FR-6.1
+C-3 does not cache failures; C-15 message and Try Again
+FR-6.2
+C-5 No data pattern; missing list in the election file
+NFR-1 Usability
+NFR-1.1
+Layout in Section 5.1 places turnout, winner, and the election selector in one view
+NFR-1.2
+C-13 definition buttons (Table 7)
+NFR-1.3
+Two layouts and reflow to 320 pixels (Section 5.1)
+NFR-1.4
+Contrast in Table 8, focus indicator, roving focus, standard elements, 24-pixel targets
+NFR-1.5
+Values also shown as text in C-7, C-10, and C-11
+NFR-1.6
+Party colors in Table 8; candidates ordered by votes; no commentary
+NFR-2 Reliability
+NFR-2.1
+C-21 calculates from counts; C-22 checks against official totals
+NFR-2.2
+C-24 single swap; one commit per update (Section 3.5)
+NFR-3 Performance
+NFR-3.1
+C-23 simplifies shapes to 500 KB or less; only the newest election loads first
+NFR-3.2
+C-3 in-memory cache; C-2 single redraw
+NFR-4 Supportability
+NFR-4.1
+Maintainer guide in the docs folder; Section 5.7
+NFR-4.2
+Two-part architecture (Section 3.1); configuration-driven website
+NFR-5 Implementation
+NFR-5.1
+Static site, no install or account (Table 2)
+NFR-5.2
+Plain HTML, CSS, JavaScript, D3; free tools only (Table 2)
+NFR-6 Interface
+NFR-6.1
+C-18, C-19 read XLSX, saved HTML, and PDF tables
+NFR-6.2
+Standard HTML, CSS, and JavaScript modules only
+NFR-7 Operational
+NFR-7.1
+GitHub Pages with HTTPS enforced (Section 3.5)
+NFR-7.2
+Public repository on GitHub Pages
+NFR-7.3
+C-17 and C-22 refuse uncertified elections
+NFR-8 Packaging
+NFR-8.1
+One repository (Section 3.4)
+NFR-9 Legal
+NFR-9.1
+Public government sources only; credited through the sources field
+NFR-9.2
+No cookies, analytics, or outside calls; IP logging disclosed (Section 5.6)
+NFR-9.3
+No seal or logo; unofficial notice in every view
+
+8. Design Decisions and Alternatives
+Table 12 records the choices that shaped the design most and what was considered instead, so a reviewer can see why the design looks the way it does.
+Table 12
+Design Decisions
+Decision
+Alternative rejected
+Reason
+Static files, no server
+A server with a database
+Results change only after an election is certified, so nothing needs to be computed on request. A static site costs nothing and has no server to secure (NFR-7.2).
+Plain JavaScript modules
+A front-end framework such as React
+The page has one screen and about fifteen components, and the requirements limit the site to plain web code plus D3 (NFR-5.2).
+SVG map
+Canvas drawing
+Each county in an SVG map is its own page element that can take keyboard focus and a text label. A canvas is one flat image that screen readers cannot see into (NFR-1.4).
+GeoJSON shapes
+TopoJSON, a smaller format
+D3 reads GeoJSON directly with no extra library, and Colorado’s simplified shapes fit inside the 500 KB limit without it (NFR-3.1).
+D3 shipped with the site
+Loading D3 from a public CDN
+A third-party outage cannot break the map, as dependency D-3 requires.
+Calculate in the build
+Calculate in the browser
+Every value is checked against official totals before anyone sees it, and the browser does less work (NFR-2.1, NFR-3.2).
+Python only for PDFs
+All Python, or all JavaScript
+Keeping one language for nearly everything makes the project easier to maintain, and pdfplumber is the tool built for PDF tables (NFR-6.1).
+
+References
+Anthropic. (2026). Claude (Opus 5.5 version) [Large language model]. https://claude.ai/
+Bloch, M. (n.d.). Mapshaper [Computer software]. GitHub. Retrieved October 10, 2026, from https://github.com/mbloch/mapshaper
+Colorado Secretary of State. (n.d.-a). Election results archives. Retrieved October 10, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Archives.html
+Colorado Secretary of State. (n.d.-b). 2022 general election results [Governor and lieutenant governor results by county]. Retrieved October 10, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/governor.html
+Colorado Secretary of State. (n.d.-c). 2022 general election turnout. Retrieved October 10, 2026, from https://www.sos.state.co.us/pubs/elections/Results/Abstract/2022/general/turnout.html
+GitHub. (n.d.-a). What is GitHub Pages? GitHub Docs. Retrieved October 10, 2026, from https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+GitHub. (n.d.-b). Securing your GitHub Pages site with HTTPS. GitHub Docs. Retrieved October 10, 2026, from https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https
+Node.js. (n.d.). About Node.js. Retrieved October 10, 2026, from https://nodejs.org/en/about
+Observable. (n.d.-a). What is D3? D3 by Observable. Retrieved October 10, 2026, from https://d3js.org/what-is-d3
+Observable. (n.d.-b). Projections. D3 by Observable. Retrieved October 10, 2026, from https://d3js.org/d3-geo/projection
+Observable. (n.d.-c). Quantize scales. D3 by Observable. Retrieved October 10, 2026, from https://d3js.org/d3-scale/quantize
+Observable. (n.d.-d). Threshold scales. D3 by Observable. Retrieved October 10, 2026, from https://d3js.org/d3-scale/threshold
+SheetJS. (n.d.). NodeJS. SheetJS Community Edition documentation. Retrieved October 10, 2026, from https://docs.sheetjs.com/docs/getting-started/installation/nodejs
+Singer-Vine, J. (n.d.). pdfplumber [Computer software]. GitHub. Retrieved October 10, 2026, from https://github.com/jsvine/pdfplumber
+Stimson, A. (2026a). Capstone project proposal: Colorado election and turnout map [Unpublished course paper]. American Military University.
+Stimson, A. (2026b). Requirements analysis document: County election and turnout map [Unpublished course paper]. American Military University.
+Stimson, A. (2026c). County election and turnout map: Project requirements specification [Unpublished course paper]. American Military University.
+U.S. Census Bureau. (2026, April 23). Cartographic boundary files. https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
+World Wide Web Consortium. (2024). Web content accessibility guidelines (WCAG) 2.2 (W3C Recommendation). https://www.w3.org/TR/WCAG22/
+World Wide Web Consortium Web Accessibility Initiative. (n.d.-a). Understanding success criterion 4.1.3: Status messages. Retrieved October 10, 2026, from https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html
+World Wide Web Consortium Web Accessibility Initiative. (n.d.-b). Understanding success criterion 2.5.8: Target size (minimum). Retrieved October 10, 2026, from https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
